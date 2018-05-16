@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ecf0f1;" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1">
+    <tabs>
+        <Tab text="Accueil">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <children>
+                        <JFXButton buttonType="RAISED" layoutX="216.0" layoutY="70.0" prefHeight="41.0" prefWidth="153.0" style="-fx-background-color: #3498db;" text="Bilan de compensation">
+                            <ripplerFill>
+                                <LinearGradient endX="1.0" endY="1.0">
+                                    <stops>
+                                        <Stop color="BLACK" />
+                                        <Stop color="#75a1ba" offset="0.007633587786259542" />
+                                        <Stop color="WHITE" offset="1.0" />
+                                    </stops>
+                                </LinearGradient>
+                            </ripplerFill>
+                        </JFXButton>
+                        <Label layoutX="264.0" layoutY="14.0" text="Accueil">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                        <JFXButton buttonType="RAISED" layoutX="215.0" layoutY="135.0" prefHeight="41.0" prefWidth="153.0" style="-fx-background-color: #3498db;" text="Bilan individuel">
+                            <ripplerFill>
+                                <LinearGradient endX="1.0" endY="1.0">
+                                    <stops>
+                                        <Stop color="BLACK" />
+                                        <Stop color="#75a1ba" offset="0.007633587786259542" />
+                                        <Stop color="WHITE" offset="1.0" />
+                                    </stops>
+                                </LinearGradient>
+                            </ripplerFill>
+                        </JFXButton>
+                        <JFXButton buttonType="RAISED" layoutX="215.0" layoutY="203.0" prefHeight="41.0" prefWidth="151.0" style="-fx-background-color: #3498db;" text="Récapitulatif sur 3 ans">
+                            <ripplerFill>
+                                <LinearGradient endX="1.0" endY="1.0">
+                                    <stops>
+                                        <Stop color="BLACK" />
+                                        <Stop color="#75a1ba" offset="0.007633587786259542" />
+                                        <Stop color="WHITE" offset="1.0" />
+                                    </stops>
+                                </LinearGradient>
+                            </ripplerFill>
+                        </JFXButton>
+                        <JFXButton buttonType="RAISED" layoutX="216.0" layoutY="274.0" prefHeight="41.0" prefWidth="153.0" style="-fx-background-color: #3498db;" text="Bulletin général">
+                            <ripplerFill>
+                                <LinearGradient endX="1.0" endY="1.0">
+                                    <stops>
+                                        <Stop color="BLACK" />
+                                        <Stop color="#75a1ba" offset="0.007633587786259542" />
+                                        <Stop color="WHITE" offset="1.0" />
+                                    </stops>
+                                </LinearGradient>
+                            </ripplerFill>
+                        </JFXButton>
+                    </children>
+                </AnchorPane>
+            </content>
+        </Tab>
+        <Tab text="Bilan de compensation">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ecf0f1;">
+                    <children>
+                        <Label layoutX="208.0" layoutY="14.0" text="Bilan de compensation">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="177.0" layoutY="93.0" text="Promotion">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="177.0" layoutY="146.0" text="Année">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <JFXComboBox layoutX="272.0" layoutY="91.0" prefHeight="26.0" prefWidth="132.0" />
+                        <JFXComboBox layoutX="272.0" layoutY="143.0" prefHeight="26.0" prefWidth="132.0" />
+                        <JFXButton buttonType="RAISED" layoutX="272.0" layoutY="232.0" prefHeight="39.0" prefWidth="89.0" style="-fx-background-color: #3498db;" text="Edition">
+                            <ripplerFill>
+                                <LinearGradient endX="1.0" endY="1.0">
+                                    <stops>
+                                        <Stop color="WHITE" />
+                                        <Stop color="#74a0b9" offset="1.0" />
+                                    </stops>
+                                </LinearGradient>
+                            </ripplerFill>
+                        </JFXButton>
+                    </children>
+                </AnchorPane>
+            </content>
+        </Tab>
+        <Tab text="Bilan individuel">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ecf0f1;">
+                    <children>
+                        <Label layoutX="239.0" layoutY="14.0" text="Bilan individuel">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="210.0" layoutY="82.0" text="Promotion">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="207.0" layoutY="132.0" text="Année">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="207.0" layoutY="185.0" text="Elève">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <JFXComboBox layoutX="300.0" layoutY="80.0" prefHeight="26.0" prefWidth="125.0" />
+                        <JFXComboBox layoutX="300.0" layoutY="129.0" prefHeight="26.0" prefWidth="125.0" />
+                        <JFXComboBox layoutX="300.0" layoutY="182.0" prefHeight="26.0" prefWidth="125.0" />
+                        <JFXButton buttonType="RAISED" layoutX="255.0" layoutY="249.0" prefHeight="39.0" prefWidth="89.0" style="-fx-background-color: #3498db;" text="Edition">
+                            <ripplerFill>
+                                <LinearGradient endX="1.0" endY="1.0">
+                                    <stops>
+                                        <Stop color="#74a0b9" />
+                                        <Stop color="WHITE" offset="1.0" />
+                                    </stops>
+                                </LinearGradient>
+                            </ripplerFill>
+                        </JFXButton>
+                    </children>
+                </AnchorPane>
+            </content>
+        </Tab>
+        <Tab text="Récap 3 ans">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ecf0f1;">
+                    <children>
+                        <Label layoutX="213.0" layoutY="14.0" text="Récapitulatif sur 3 ans">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                        <JFXButton buttonType="RAISED" layoutX="274.0" layoutY="263.0" prefHeight="38.0" prefWidth="89.0" style="-fx-background-color: #3498db;" text="Edition">
+                            <ripplerFill>
+                                <LinearGradient endX="1.0" endY="1.0">
+                                    <stops>
+                                        <Stop color="#74a0b9" />
+                                        <Stop color="#74a0b9" offset="0.007633587786259542" />
+                                        <Stop color="WHITE" offset="1.0" />
+                                    </stops>
+                                </LinearGradient>
+                            </ripplerFill>
+                        </JFXButton>
+                        <Label layoutX="185.0" layoutY="95.0" text="Promotion">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <JFXComboBox layoutX="291.0" layoutY="93.0" prefHeight="26.0" prefWidth="126.0" />
+                    </children>
+                </AnchorPane>
+            </content>
+        </Tab>
+        <Tab text="Bulletin général">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ecf0f1;">
+                    <children>
+                        <Label layoutX="238.0" layoutY="14.0" text="Bulletin général">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                        <JFXButton buttonType="RAISED" layoutX="255.0" layoutY="266.0" prefHeight="39.0" prefWidth="89.0" style="-fx-background-color: #3498db;" text="Edition" />
+                        <Label layoutX="210.0" layoutY="84.0" text="Promotion">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="210.0" layoutY="140.0" text="Année">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <JFXComboBox layoutX="300.0" layoutY="82.0" prefHeight="26.0" prefWidth="145.0" />
+                        <JFXComboBox layoutX="300.0" layoutY="137.0" prefHeight="26.0" prefWidth="145.0" />
+                    </children>
+                </AnchorPane>
+            </content>
+        </Tab>
+    </tabs>
+</TabPane>
