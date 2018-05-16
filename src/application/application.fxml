@@ -10,13 +10,13 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ecf0f1;" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1">
+<TabPane fx:id="tp_principal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ecf0f1;" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <tabs>
         <Tab text="Accueil">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <children>
-                        <JFXButton buttonType="RAISED" layoutX="216.0" layoutY="70.0" prefHeight="41.0" prefWidth="153.0" style="-fx-background-color: #3498db;" text="Bilan de compensation">
+                        <JFXButton fx:id="jfxb_bilanCompensation" buttonType="RAISED" layoutX="216.0" layoutY="70.0" onAction="#handleBilanCompensationAction" prefHeight="41.0" prefWidth="153.0" style="-fx-background-color: #3498db;" text="Bilan de compensation">
                             <ripplerFill>
                                 <LinearGradient endX="1.0" endY="1.0">
                                     <stops>
