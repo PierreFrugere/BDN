@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<regles_gestion>
+    <promo  nom="ING3">
+        <UE>
+            <nom>SHES</nom>
+            <credit>15</credit>
+            <coeficient>10</coeficient>
+            <seuil_validation>8</seuil_validation>
+            <seuil_validation_matiere>11</seuil_validation_matiere>
+            <matiere>
+                <nom>Système d'Information dEntreprise</nom>
+                <enseignant>EnsSysteme</enseignant>
+                <coeficient>1</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+            <matiere>
+                <nom>Carriere de l'ingénieur</nom>
+                <enseignant>M. Pitiot</enseignant>
+                <coeficient>1</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+            <matiere>
+                <nom>Qualite</nom>
+                <enseignant>M. Barrios</enseignant>
+                <coeficient>1</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+	        <matiere>
+                <nom>Conduite de réunion</nom>
+                <enseignant>Mme Calmelly</enseignant>
+                <coeficient>1</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+			<matiere>
+                <nom>Préparation au recrutement</nom>
+                <enseignant>Mme Calmelly</enseignant>
+                <coeficient>1</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+			<matiere>
+                <nom>Engagement personnel et participatif</nom>
+                <enseignant>Mme Calmelly</enseignant>
+                <coeficient>1</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+        </UE>
+        <UE>
+            <nom>Projet</nom>
+            <credit>10</credit>
+            <coeficient>8</coeficient>
+            <seuil_validation>11</seuil_validation>
+			<seuil_validation_matiere>11</seuil_validation_matiere>
+            <matiere>
+                <nom>Projet</nom>
+                <enseignant>M. Trullen</enseignant>
+                <coeficient>8</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+		</UE>
+		<UE>
+            <nom>Modules optionnels</nom>
+            <credit>10</credit>
+            <coeficient>12</coeficient>
+            <seuil_validation>11</seuil_validation>
+			<seuil_validation_matiere>11</seuil_validation_matiere>
+            <matiere>
+                <nom>Module 1</nom>
+                <enseignant>M. Compta</enseignant>
+                <coeficient>6</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+            <matiere>
+                <nom>Module 2</nom>
+                <enseignant>M. Gef</enseignant>
+                <coeficient>6</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+		</UE>
+		<UE>
+            <nom>Missions en entreprise</nom>
+            <credit>25</credit>
+            <coeficient>25</coeficient>
+            <seuil_validation>11</seuil_validation>
+			<seuil_validation_matiere>11</seuil_validation_matiere>
+            <matiere>
+                <nom>Mission 8</nom>
+                <enseignant>Mme. Calmelly</enseignant>
+                <coeficient>25</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+		</UE>
+		<UE>
+            <nom>Anglais</nom>
+            <credit>0</credit>
+            <coeficient>2</coeficient>
+            <seuil_validation>11</seuil_validation>
+			<seuil_validation_matiere>11</seuil_validation_matiere>
+            <matiere>
+                <nom>Anglais</nom>
+                <enseignant>Mme. Taylor</enseignant>
+                <coeficient>2</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+		</UE>
+		<UE>
+            <nom>Management</nom>
+            <credit>5</credit>
+            <coeficient>4</coeficient>
+            <seuil_validation>11</seuil_validation>
+			<seuil_validation_matiere>11</seuil_validation_matiere>
+            <matiere>
+                <nom>Management du systeme d'information</nom>
+                <enseignant>Mme. Taylor</enseignant>
+                <coeficient>2</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+			<matiere>
+                <nom>Management de proximité de Res Humaines</nom>
+                <enseignant>Mme. Taylor</enseignant>
+                <coeficient>2</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+		</UE>
+    </promo>
+</regles_gestion>

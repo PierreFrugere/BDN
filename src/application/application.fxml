@@ -142,7 +142,7 @@
                         <JFXComboBox layoutX="300.0" layoutY="80.0" prefHeight="26.0" prefWidth="125.0" />
                         <JFXComboBox layoutX="300.0" layoutY="129.0" prefHeight="26.0" prefWidth="125.0" />
                         <JFXComboBox layoutX="300.0" layoutY="182.0" prefHeight="26.0" prefWidth="125.0" />
-                        <JFXButton buttonType="RAISED" layoutX="255.0" layoutY="249.0" prefHeight="39.0" prefWidth="89.0" style="-fx-background-color: #3498db;" text="Edition">
+                        <JFXButton buttonType="RAISED" layoutX="255.0" layoutY="249.0" onAction="#handleEditionButtonBulletinIndividuel" prefHeight="39.0" prefWidth="89.0" style="-fx-background-color: #3498db;" text="Edition">
                             <ripplerFill>
                                 <LinearGradient endX="1.0" endY="1.0">
                                     <stops>

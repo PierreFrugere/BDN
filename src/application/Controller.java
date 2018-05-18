@@ -4,7 +4,13 @@
  */
 package application;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import com.jfoenix.controls.JFXButton;
+
+import gestion.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -111,6 +117,37 @@ public class Controller {
     private void handleReturnHomeAction(ActionEvent event) {   	
     	// Switch to "Accueil" Tab
     	this.selectionModel.select(t_accueil);
+    }
+    
+    @FXML
+    private void handleEditionButtonBulletinIndividuel(ActionEvent event) {
+    	String[] listFichiers;
+    	String cheminFichier = new Extracteur("..\\ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Ressources");
+    	
+    	System.out.println("cheminFichier: " + cheminFichier);
+    	
+//    	listFichiers = repertoire.list();
+//    	
+//    	ArrayList<String> listSansDoublonsPromo = new ArrayList<String>();
+//    	ArrayList<String> listSansDoublonsAnnee = new ArrayList<String>();    
+//    	
+//    	for (int cpt = 0; cpt < listFichiers.length; cpt++) {
+//    		if (listFichiers[cpt].endsWith(".csv")) {
+//    			if (listFichiers[cpt].length() > 11) {
+//    				listSansDoublonsAnnee.add(listFichiers[cpt].substring(7, 11));
+//    				listSansDoublonsPromo.add(listFichiers[cpt].substring(0, 7));
+//    			}
+//    		}
+//    	}
+//    	
+//    	for (String elm: listSansDoublonsAnnee) {
+//    		System.out.println("Liste années" + elm);
+//    	}
+//    	
+//    	for (String elm: listSansDoublonsPromo) {
+//    		System.out.println("Liste années" + elm);
+//    	}
+    	
     }
 
 }

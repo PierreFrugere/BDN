@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<regles_gestion>
+    <promo  nom="ING2">
+        <UE nom="Systèmes et Réseaux">
+            <nom>Systèmes et Réseaux</nom>
+            <credit>10</credit>
+            <coeficient>11</coeficient>
+            <seuil_validation>11</seuil_validation>
+            <matiere>
+                <nom>Sécurité informatique</nom>
+                <enseignant>M. Buffière</enseignant>
+                <coeficient>1</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+        <matiere>
+                <nom>Systèmes d'exploitation</nom>
+                <enseignant>M. Buffière</enseignant>
+                <coeficient>3</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+        <matiere>
+                <nom>Unix</nom>
+                <enseignant>M. Uni</enseignant>
+                <coeficient>1,5</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+        <matiere>
+                <nom>Réseaux - normes et protocoles</nom>
+                <enseignant>M. Buffière</enseignant>
+                <coeficient>2</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+        <matiere>
+                <nom>Réseaux : mise en oeuvre</nom>
+                <enseignant>M. Buffière</enseignant>
+                <coeficient>3,5</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+        </UE>
+        <UE nom="Développement">
+            <nom>Développement</nom>
+            <credit>10</credit>
+            <coeficient>11</coeficient>
+            <seuil_validation>11</seuil_validation>
+            <matiere>
+                <nom>Analyse orientée objets</nom>
+                <enseignant>M. Escalier</enseignant>
+                <coeficient>2,5</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+            <matiere>
+                <nom>Programmation orientée objets</nom>
+                <enseignant>M. Pitiot</enseignant>
+                <coeficient>2,5</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+        <matiere>
+                <nom>Base de données</nom>
+                <enseignant>M. Mouly</enseignant>
+                <coeficient>2,5</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+        <matiere>
+                <nom>Développement Web</nom>
+                <enseignant>M. Mouly</enseignant>
+                <coeficient>2,5</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+        </UE>
+    <UE nom="Sciences de l'ingénieur">
+            <nom>Sciences de l'ingénieur</nom>
+            <credit>10</credit>
+            <coeficient>12</coeficient>
+            <seuil_validation>11</seuil_validation>
+            <matiere>
+                <nom>Analyse numérique</nom>
+                <enseignant>M. Trullen</enseignant>
+                <coeficient>3,5</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+        <matiere>
+                <nom>Programmation linéaire</nom>
+                <enseignant>M. Trullen</enseignant>
+                <coeficient>2</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+            <matiere>
+                <nom>Théorie de graphes</nom>
+                <enseignant>M. Trullen</enseignant>
+                <coeficient>2</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+        <matiere>
+                <nom>Modélisation et analyse des systèmes</nom>
+                <enseignant>M. Trullen</enseignant>
+                <coeficient>2</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+        <matiere>
+                <nom>Traitement du signal</nom>
+                <enseignant>M. Podelky</enseignant>
+                <coeficient>3,5</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+        <matiere>
+                <nom>Modulation</nom>
+                <enseignant>M. Podelky</enseignant>
+                <coeficient>2</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+        </UE>
+    <UE nom="SHES">
+            <nom>SHES</nom>
+            <credit>5</credit>
+            <coeficient>5</coeficient>
+            <seuil_validation>11</seuil_validation>
+            <matiere>
+                <nom>Conduite de projet</nom>
+                <enseignant>M. Rous</enseignant>
+                <coeficient>2,5</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+            <matiere>
+                <nom>Engagement personnel et participatif</nom>
+                <enseignant>M. Annie</enseignant>
+                <coeficient>1</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+        </UE>
+    <UE nom="Projet">
+            <nom>Projet</nom>
+            <credit>5</credit>
+            <coeficient>6</coeficient>
+            <seuil_validation>11</seuil_validation>
+            <matiere>
+                <nom>Projet</nom>
+                <enseignant>M. Rous</enseignant>
+                <coeficient>2</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+            <matiere>
+                <nom>Travail de recherche en gestion</nom>
+                <enseignant>M. Tourette</enseignant>
+                <coeficient>2</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+        </UE>
+    <UE nom="Projet">
+            <nom>Missions en entreprise</nom>
+            <credit>20</credit>
+            <coeficient>12</coeficient>
+            <seuil_validation>11</seuil_validation>
+            <matiere>
+                <nom>Mission n°5</nom>
+                <enseignant>Mme. Calmelly</enseignant>
+                <coeficient>4,5</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+        <matiere>
+                <nom>Mission n°6</nom>
+                <enseignant>Mme. Calmelly</enseignant>
+                <coeficient>4,5</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+        <matiere>
+                <nom>Mission n°7</nom>
+                <enseignant>Mme. Calmelly</enseignant>
+                <coeficient>5</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+        </UE>
+    <UE nom="Anglais">
+            <nom>Anglais</nom>
+            <credit>0</credit>
+            <coeficient>3</coeficient>
+            <seuil_validation>11</seuil_validation>
+            <matiere>
+                <nom>Anglais</nom>
+                <enseignant>Mme. Taylor</enseignant>
+                <coeficient>4,5</coeficient>
+                <note_minimale>7</note_minimale>
+            </matiere>
+    </UE>
+    </promo>
+</regles_gestion>
