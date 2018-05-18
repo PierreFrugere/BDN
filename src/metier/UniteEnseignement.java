@@ -1,13 +1,19 @@
-/**
- * 
+/*
+ * UniteEnseignement.java			18/05/2018
+ * 3iL - Projet Bulletin de Note - 2018
  */
 package metier;
 
 import java.util.ArrayList;
 
-import parametre.CUEParam;
+import parametre.UEParam;
 
-public class CUniteEnseignement {
+/**
+ * Classe représentant une unité d'enseignement. Il s'agit d'un groupement de matière de cours de l'école 3iL.
+ * @author WilliamHenry, BenjaminMazoyer & PierreFrugere
+ * @version 2.0
+ */
+public class UniteEnseignement {
 
 	/** nom de l'UE */
 	private String nomUE;
@@ -16,26 +22,26 @@ public class CUniteEnseignement {
 	private float moyenneUE;
 	
 	/** liste de mati�res */
-	private ArrayList<CMatiere> matieres; 
+	private ArrayList<Matiere> matieres;
 	
-	private CUEParam paramUE;
+	private UEParam paramUE;
 	
 	/**
-	 * Constructeur de la classe CUniteEnseignement
+	 * Constructeur de la classe UniteEnseignement
 	 * @param nomUE
 	 */
-	public CUniteEnseignement(String nomUE){
+	public UniteEnseignement(String nomUE){
 		this.nomUE = nomUE;
         this.moyenneUE = 0;
         this.matieres = null;
 	}
 
 	/**
-	 * Constructeur de la classe CUniteEnseignement 
+	 * Constructeur de la classe UniteEnseignement
 	 * @param nomUE
 	 * @param matieres
 	 */
-	public CUniteEnseignement(String nomUE,ArrayList<CMatiere> matieres,CUEParam ue){
+	public UniteEnseignement(String nomUE, ArrayList<Matiere> matieres, UEParam ue){
 		this.nomUE = nomUE;
 		this.moyenneUE = 0;
 		this.matieres =  matieres;
@@ -71,8 +77,8 @@ public class CUniteEnseignement {
 	 * Cette m�thode permet d'ajouter une liste de mati�res
 	 * @param listeMatiere
 	 */
-	public void ajouterMatiere(ArrayList<CMatiere> listeMatiere){
-        for (CMatiere matiere : listeMatiere) {
+	public void ajouterMatiere(ArrayList<Matiere> listeMatiere){
+        for (Matiere matiere : listeMatiere) {
             this.matieres.add(matiere);
         }
 	}
@@ -81,7 +87,7 @@ public class CUniteEnseignement {
 	 * Cette m�thode permet d'ajouter une mati�re
 	 * @param matiere
 	 */
-    public void ajouterMatiere(CMatiere matiere){
+    public void ajouterMatiere(Matiere matiere){
         this.matieres.add(matiere);
     }
 
@@ -93,7 +99,7 @@ public class CUniteEnseignement {
         return this.moyenneUE;
     }
 
-    public ArrayList<CMatiere> getMatieres(){
+    public ArrayList<Matiere> getMatieres(){
     	return(this.matieres);
     }
     
@@ -106,17 +112,17 @@ public class CUniteEnseignement {
 	public String toString() {
 		String liste_matiere_string;
 		liste_matiere_string = "";
-		for (CMatiere matiere : matieres) {
+		for (Matiere matiere : matieres) {
 			liste_matiere_string += matiere.toString();
 		}
 		return ("Unite d'enseignement { Nom: " + getNomUE() + " Moyenne:" + Float.toString(getMoyenneUE()) + " Liste matieres: {" + liste_matiere_string + "}} " );
 	}
 
-	public CUEParam getParamUE() {
+	public UEParam getParamUE() {
 		return paramUE;
 	}
 
-	public void setParamUE(CUEParam paramUE) {
+	public void setParamUE(UEParam paramUE) {
 		this.paramUE = paramUE;
 	}
 

@@ -1,3 +1,7 @@
+/*
+ * Controller.java			18/05/2018
+ * 3iL - Projet Bulletin de Note - 2018
+ */
 package application;
 
 import com.jfoenix.controls.JFXButton;
@@ -8,6 +12,11 @@ import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
+/**
+ * Controller de la vue "application.fxml"
+ * @author WilliamHenry, BenjaminMazoyer & PierreFrugere
+ * @version 2.0
+ */
 public class Controller {
 
     @FXML //  fx:id="tp_principal"

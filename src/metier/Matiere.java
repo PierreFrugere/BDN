@@ -1,22 +1,28 @@
-/**
- * 
+/*
+ * Matière.java			18/05/2018
+ * 3iL - Projet Bulletin de Note - 2018
  */
 package metier;
 
-public class CMatiere {
+/**
+ * Classe représentant une matière de cours de l'école 3iL
+ * @author WilliamHenry, BenjaminMazoyer & PierreFrugere
+ * @version 2.0
+ */
+public class Matiere {
 
-	/** le nom de la mati�re */
+	/** le nom de la matière */
 	private String nomMatiere;
 	
-	/** la note obtenu � la mati�re */
+	/** la note obtenu à la matière */
 	private float noteMatiere;
 	
 	/**
-	 * constructeur de la classe CMatiere
+	 * constructeur de la classe Matiere
 	 * @param nom
 	 * @param note
 	 */
-	public CMatiere(String nom, float note) {
+	public Matiere(String nom, float note) {
 		this.nomMatiere = nom;
 		this.noteMatiere = note;
 	}
@@ -56,8 +62,8 @@ public class CMatiere {
 
 	@Override
 	/**
-	 * M�thode qui permet d'afficher une matiere
-	 * @return une chaine de caract�re qui repr�sente une matiere
+	 * Méthode qui permet d'afficher une matiere
+	 * @return une chaine de caractère qui représente une matiere
 	 * @Override
 	 */
 	public String toString() {

@@ -1,24 +1,33 @@
+/*
+ * Eleve.java			18/05/2018
+ * 3iL - Projet Bulletin de Note - 2018
+ */
 package metier;
 
-import gestion.CExtracteur;
-import parametre.CMatiereParam;
-import parametre.CUEParam;
+import gestion.Extracteur;
+import parametre.MatiereParam;
+import parametre.UEParam;
 
 import java.util.ArrayList;
 
-public class CEleve {
+/**
+ * Classe représentant un élève de l'école 3iL
+ * @author WilliamHenry, BenjaminMazoyer & PierreFrugere
+ * @version 2.0
+ */
+public class Eleve {
 
-    /** nom de l'�l�ve */
+    /** nom de l'élève */
     private String nomEleve;
 
-    /** prenom de l'�l�ve */
+    /** prenom de l'élève */
     private String prenomEleve;
 
-    /** promo de l'�l�ve */
+    /** promo de l'élève */
     private String promoEleve;
     
-    /** chaque �l�ve a 3 ann�e */
-    private CAnnee annee;
+    /** chaque élève a 3 année */
+    private Annee annee;
 
     private String adresse;
 
@@ -30,18 +39,18 @@ public class CEleve {
 
     private String commentaireResponsable;
 
-    /** moyenne g�n�rale de l'�l�ve */
+    /** moyenne générale de l'élève */
     private float moyenneGenerale;
 
     
 
     /**
-     * Constructeur de la classe CEleve
+     * Constructeur de la classe Eleve
      * @param nom
      * @param prenom
      * @param promo
      */
-    public CEleve(String nom, String prenom, String promo,float moy, String ING, String NomFichierParam){
+    public Eleve(String nom, String prenom, String promo, float moy, String ING, String NomFichierParam){
         int cptAnnee;
         this.setNomEleve(nom);
         this.setPrenomEleve(prenom);
@@ -52,20 +61,20 @@ public class CEleve {
         this.setToeic("");
         this.setCommentaire("");
         this.setCommentaireResponsable("");
-        annee = new CAnnee(ING);
-        CMatiere cMatiere;
-        String cheminFichierParam = new CExtracteur("..\\ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Parametrages");
-        CExtracteur extracteurUE = new CExtracteur(cheminFichierParam+"\\Parametrage-"+NomFichierParam+".xml");
+        annee = new Annee(ING);
+        Matiere Matiere;
+        String cheminFichierParam = new Extracteur("..\\ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Parametrages");
+        Extracteur extracteurUE = new Extracteur(cheminFichierParam+"\\Parametrage-"+NomFichierParam+".xml");
         for(cptAnnee=1;cptAnnee<4;cptAnnee++) {
-            ArrayList<CUEParam> paramsUE = new ArrayList<CUEParam>();
+            ArrayList<UEParam> paramsUE = new ArrayList<UEParam>();
             paramsUE = extracteurUE.ExtracteurParametres("ING"+cptAnnee);
-            ArrayList<CMatiere> matieresUE = new ArrayList<CMatiere>();
-            for (CUEParam UEparametrer : paramsUE) {
-                for (CMatiereParam UEmatieres : UEparametrer.getMatieresUE()) {
-                    cMatiere = new CMatiere(UEmatieres.getNomMatiere(), (float) 0);
-                    matieresUE.add(cMatiere);
+            ArrayList<metier.Matiere> matieresUE = new ArrayList<metier.Matiere>();
+            for (UEParam UEparametrer : paramsUE) {
+                for (MatiereParam UEmatieres : UEparametrer.getMatieresUE()) {
+                    Matiere = new Matiere(UEmatieres.getNomMatiere(), (float) 0);
+                    matieresUE.add(Matiere);
                 }
-                this.annee.getINGx("ING"+cptAnnee).add(new CUniteEnseignement(UEparametrer.getNomUE(), new ArrayList<CMatiere>(matieresUE), UEparametrer));
+                this.annee.getINGx("ING"+cptAnnee).add(new UniteEnseignement(UEparametrer.getNomUE(), new ArrayList<metier.Matiere>(matieresUE), UEparametrer));
 
                 matieresUE.clear();
             }
@@ -74,7 +83,7 @@ public class CEleve {
 
     /**
      * Accesseur de l'attribut nomEleve
-     * @return le nom de l'�l�ve
+     * @return le nom de l'élève
      */
     public String getNomEleve() {
         return nomEleve;
@@ -90,7 +99,7 @@ public class CEleve {
 
     /**
      * Accesseur de l'attribut prenomEleve
-     * @return le prenom de l'�l�ve
+     * @return le prenom de l'élève
      */
     public String getPrenomEleve() {
         return prenomEleve;
@@ -106,7 +115,7 @@ public class CEleve {
 
     /**
      * Accesseur de l'attribut promoEleve
-     * @return promo de l'�l�ve
+     * @return promo de l'élève
      */
     public String getPromoEleve() {
         return promoEleve;
@@ -122,7 +131,7 @@ public class CEleve {
 
     /**
      * Accesseur de l'attribut moyenneGenerale
-     * @return moyenne g�n�rale de l'�l�ve
+     * @return moyenne générale de l'élève
      */
     public float getMoyenneGenerale() {
         return (this.moyenneGenerale);
@@ -137,15 +146,15 @@ public class CEleve {
     }
 
     /**
-     * Cette m�thode permet de calculer la moyenne g�n�rale de l'�l�ve
-     * @return la moyenne de l'�l�ve
+     * Cette m�thode permet de calculer la moyenne g�n�rale de l'élève
+     * @return la moyenne de l'élève
      */
     public float calculMoyenneGenerale(){
         return (this.moyenneGenerale);
     }
     
     /**
-     * Indique si l'eleve correspond bien au donn�e pass� en parametre
+     * Indique si l'eleve correspond bien au donnée passé en parametre
      * @param nom
      * @param prenom
      * @param promo
@@ -164,7 +173,7 @@ public class CEleve {
     }
 
     /**
-     * Cette fonction a l'air OK suite au test renvoit trois int le premier pour le num�ro de l'ue seconde numero de la matiere toisieme num�ro de lannee
+     * Cette fonction a l'air OK suite au test renvoit trois int le premier pour le numéro de l'ue seconde numero de la matiere toisieme numéro de lannee
      * @param nomMatiere
      * @return
      */
@@ -174,10 +183,10 @@ public class CEleve {
         int index_matiere;
         int[] liste_index = {-1,-1,-1};
         while (flag == false && this.annee.getINGx(Annee).size() > index_UE) {
-            CUniteEnseignement UE = this.annee.getINGx(Annee).get(index_UE);
+            UniteEnseignement UE = this.annee.getINGx(Annee).get(index_UE);
             index_matiere = 0;
             while (flag == false && UE.getMatieres().size() > index_matiere) {
-                CMatiere UEmatieres = UE.getMatieres().get(index_matiere);
+                Matiere UEmatieres = UE.getMatieres().get(index_matiere);
                 if (UEmatieres.getNomMatiere().equals(nomMatiere)) {
                     flag = true;
                     liste_index[0] = index_UE;
@@ -205,7 +214,7 @@ public class CEleve {
 
     @Override
     /**
-     * Cette m�thode permet d'afficher un �l�ve
+     * Cette méthode permet d'afficher un élève
      * @return
      * @Override
      */
@@ -219,7 +228,7 @@ public class CEleve {
         return retour;
     }
 
-    public CAnnee getAnnee() {
+    public Annee getAnnee() {
         return annee;
     }
 
@@ -239,7 +248,7 @@ public class CEleve {
         this.dateNaissance = date;
     }
 
-    public void setAnnee(CAnnee annee) {
+    public void setAnnee(Annee annee) {
         this.annee = annee;
     }
 

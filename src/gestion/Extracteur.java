@@ -1,8 +1,10 @@
-/**
- * pGestion correspond au paquetage de gestion g�n�rale de l'application et donc utilise toutes les autres donn�es
+/*
+ * BulletinNote.java			18/05/2018
+ * 3iL - Projet Bulletin de Note - 2018
  */
 package gestion;
 
+import metier.Eleve;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -18,10 +20,9 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import metier.CEleve;
-import parametre.CMatiereParam;
-import parametre.CParamGeneral;
-import parametre.CUEParam;
+import parametre.MatiereParam;
+import parametre.ParamGeneral;
+import parametre.UEParam;
 
 import java.io.*;
 import java.text.NumberFormat;
@@ -31,21 +32,23 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * CExtracteur permet d'extraire les informations de certain fichier et de les mettre transformer en objet manipulable
+ * Classe qui permet d'extraire les informations de différents fichiers et de les transformer en objet manipulable
+ * @author WilliamHenry, BenjaminMazoyer & PierreFrugere
+ * @version 2.0
  */
-public class CExtracteur {
+public class Extracteur {
 
     // Le chemin vers le fichier ou l'on doit extraire quelque chose, le probl�me c'ets que j'ai plusieurs type de fichier
     // du coup plusieurs chemin ?
     private String cheminFichier;
     // On va extraire des eleves est ce qu'il a besoin de d'un parametre avec la liste ? si oui parreille pour les ue ?
-    private ArrayList<CEleve> eleves = new ArrayList<CEleve>();
+    private ArrayList<Eleve> eleves = new ArrayList<Eleve>();
 
     /**
      * Constructeur ayant besoin du chemin d'acc�s au fichier � manipuler
      * @param cheminFichier le chemin vers le fichier dans lequel les informations vont �tre extraites.
      */
-    public CExtracteur(String cheminFichier){
+    public Extracteur(String cheminFichier){
         this.cheminFichier = cheminFichier;
     }
 
@@ -53,7 +56,7 @@ public class CExtracteur {
      * Fonction qui extrait la liste des �l�ves du fichier csv au format d�finit dans le cahier des charges
      * @return la liste des �l�ves avec le nom, le prenom, la promo et la moyenne g�n�rale
      */
-    public ArrayList<CEleve> ExtracteurEleves(String NomFichierParam) throws ParseException {
+    public ArrayList<Eleve> ExtracteurEleves(String NomFichierParam) throws ParseException {
         String Nom = "";
         String Prenom = "";
         String Promo = "";
@@ -92,7 +95,7 @@ public class CExtracteur {
                 cptColone++;
             }
             if(cptLigne != 0) {
-                this.eleves.add(new CEleve(Nom,Prenom,Promo,MoyenneGenerale.floatValue(),Promo,NomFichierParam));
+                this.eleves.add(new Eleve(Nom,Prenom,Promo,MoyenneGenerale.floatValue(),Promo,NomFichierParam));
             }
             cptLigne++;
         }
@@ -105,7 +108,7 @@ public class CExtracteur {
      * @param eleves la liste des �l�ves avec leurs mati�res
      * @return
      */
-    public ArrayList<CEleve> ExtracteurNotes(ArrayList<CEleve> eleves, String Annee) throws ParseException {
+    public ArrayList<Eleve> ExtracteurNotes(ArrayList<Eleve> eleves, String Annee) throws ParseException {
         int index_eleve = 0;
         ArrayList<String> nomMatieres = new ArrayList<String>();
         CSVReader reader = null;
@@ -141,7 +144,7 @@ public class CExtracteur {
                     prenom = value;
                     index_eleve = 0;
                     while (eleves.size() > index_eleve && flag==false) {
-                        CEleve eleve = eleves.get(index_eleve);
+                        Eleve eleve = eleves.get(index_eleve);
                         if (eleve.cmpElevetoValue(nom,prenom,promo)){
                             // j'ai trouv� les eleves
                             flag = true;
@@ -171,7 +174,7 @@ public class CExtracteur {
         return(eleves);
     }
 
-    public ArrayList<CEleve> ExtracteurNotesToutesAnnee(ArrayList<CEleve> eleves) throws ParseException {
+    public ArrayList<Eleve> ExtracteurNotesToutesAnnee(ArrayList<Eleve> eleves) throws ParseException {
         eleves = this.ExtracteurNotes(eleves,"ING1");
         eleves = this.ExtracteurNotes(eleves,"ING2");
         eleves = this.ExtracteurNotes(eleves,"ING3");
@@ -183,10 +186,10 @@ public class CExtracteur {
      * Fonction qui extrait la liste des param�tres du fichier xml au format d�finit dans le cahier des charges
      * @return la liste des param�tres pour les UE et leurs mati�res
      */
-    public CParamGeneral ExtracteurParametresGeneraux() {
+    public ParamGeneral ExtracteurParametresGeneraux() {
         // Etape 1 : r�cup�ration d'une instance de la classe "DocumentBuilderFactory"
         final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        CParamGeneral paramGeneral = new CParamGeneral(0,0,0);
+        ParamGeneral paramGeneral = new ParamGeneral(0,0,0);
 
         try {
             // Etape 2 : cr�ation d'un parseur
@@ -251,11 +254,11 @@ public class CExtracteur {
      * Fonction qui extrait la liste des param�tres du fichier xml au format d�finit dans le cahier des charges
      * @return la liste des param�tres pour les UE et leurs mati�res
      */
-    public ArrayList<CUEParam>  ExtracteurParametres(String annee) {
+    public ArrayList<UEParam>  ExtracteurParametres(String annee) {
         // Etape 1 : r�cup�ration d'une instance de la classe "DocumentBuilderFactory"
         final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        ArrayList<CUEParam> listeParametresUniteEnseignement = new ArrayList<CUEParam>();
-        ArrayList<CMatiereParam> listeParametresMatiere = new ArrayList<CMatiereParam>();
+        ArrayList<UEParam> listeParametresUniteEnseignement = new ArrayList<UEParam>();
+        ArrayList<MatiereParam> listeParametresMatiere = new ArrayList<MatiereParam>();
 
 
         try {
@@ -301,11 +304,11 @@ public class CExtracteur {
                                 //final Element note_minimale = (Element) matiere.getElementsByTagName("note_minimale").item(0);
                                 // Attention Float.parseFloat demande un string bien pr�cit pour devenir float (coef ne devrait pas etre dans cette classe je crois)
                                 Number coeficientMatVal = NumberFormat.getNumberInstance(Locale.FRENCH).parse(coeficientMat.getTextContent());
-                                listeParametresMatiere.add(new CMatiereParam(nomMat.getTextContent(), coeficientMatVal.floatValue(), enseignant.getTextContent()));
+                                listeParametresMatiere.add(new MatiereParam(nomMat.getTextContent(), coeficientMatVal.floatValue(), enseignant.getTextContent()));
                             }
                             Number creditVal = NumberFormat.getNumberInstance(Locale.FRENCH).parse(credit.getTextContent());
                             Number coeficientVal = NumberFormat.getNumberInstance(Locale.FRENCH).parse(coeficient.getTextContent());
-                            listeParametresUniteEnseignement.add(new CUEParam(nom.getTextContent(), creditVal.floatValue(), coeficientVal.floatValue(), new ArrayList<CMatiereParam>(listeParametresMatiere)));
+                            listeParametresUniteEnseignement.add(new UEParam(nom.getTextContent(), creditVal.floatValue(), coeficientVal.floatValue(), new ArrayList<MatiereParam>(listeParametresMatiere)));
                             listeParametresMatiere.clear();
                         }
                     }
@@ -324,7 +327,7 @@ public class CExtracteur {
         return(listeParametresUniteEnseignement);
     }
 
-    public int SearchIndexEleveIndividuel(CEleve person) throws IOException {
+    public int SearchIndexEleveIndividuel(Eleve person) throws IOException {
         int index=0;
         boolean flag = false;
         FileInputStream fichier = new FileInputStream(cheminFichier);
@@ -369,7 +372,7 @@ public class CExtracteur {
     }
 
 
-    public CEleve ExtracteurInformationIndividuel(int index, CEleve person, String promo) throws IOException {
+    public Eleve ExtracteurInformationIndividuel(int index, Eleve person, String promo) throws IOException {
 
         FileInputStream fichier = new FileInputStream(cheminFichier);
         final HSSFWorkbook wb = new HSSFWorkbook(fichier);

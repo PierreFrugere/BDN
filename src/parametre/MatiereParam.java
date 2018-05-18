@@ -1,14 +1,17 @@
-/**
- * pParametre correspond au paquetage de gestion de tous les param�tre extrait du fichier de param�trage
+/*
+ * MatiereParam.java			18/05/2018
+ * 3iL - Projet Bulletin de Note - 2018
  */
 package parametre;
 
-import metier.CMatiere;
+import metier.Matiere;
 
 /**
- * Les param�tres en rapport avec les mati�res
+ * Classe représentant les paramètres en rapport avec les matières
+ * @author WilliamHenry, BenjaminMazoyer & PierreFrugere
+ * @version 2.0
  */
-public class CMatiereParam {
+public class MatiereParam {
 	
 	private String nomMatiere;
 	private float coeffMatiere;
@@ -16,12 +19,12 @@ public class CMatiereParam {
 	private String observation;
 
     /**
-     * Constructeur stocke tous les param�tres n�cessaires � la gestion des mati�res
-     * @param nom de la mati�re
-     * @param coeff de la mati�re
-     * @param prof de la mati�re
+     * Constructeur stocke tous les paramètres nécessaires à la gestion des matiéres
+     * @param nom de la matière
+     * @param coeff de la matière
+     * @param prof de la matière
      */
-	public CMatiereParam(String nom,float coeff,String prof){
+	public MatiereParam(String nom, float coeff, String prof){
 		this.setNomMatiere(nom);
 		this.setCoeffMatiere(coeff);
 		this.setEnseignant(prof);
@@ -29,31 +32,31 @@ public class CMatiereParam {
 	}
 
     /**
-     * Indique le nom de la mati�re
-     * @return le nom de la mati�re
+     * Indique le nom de la matière
+     * @return le nom de la matière
      */
 	public String getNomMatiere() {
 		return nomMatiere;
 	}
 
     /**
-     * Attribut un nom a la mati�re
-     * @param nomMatiere le nom de la mati�re
+     * Attribut un nom a la matière
+     * @param nomMatiere le nom de la matière
      */
 	public void setNomMatiere(String nomMatiere) {
 		this.nomMatiere = nomMatiere;
 	}
 
     /**
-     * Indique le coefficient de la mati�re
-     * @return le coefficient de la mati�re
+     * Indique le coefficient de la matière
+     * @return le coefficient de la matière
      */
 	public float getCoeffMatiere() {
 		return coeffMatiere;
 	}
 
     /**
-     * Attribut le coefficient de la mati�re
+     * Attribut le coefficient de la matière
      * @param coeffMatiere
      */
 	public void setCoeffMatiere(float coeffMatiere) {
@@ -61,7 +64,7 @@ public class CMatiereParam {
 	}
 
     /**
-     * Indique l'enseignant de la mati�re
+     * Indique l'enseignant de la matière
      * @return un nom d'enseignant
      */
 	public String getEnseignant() {
@@ -69,7 +72,7 @@ public class CMatiereParam {
 	}
 
     /**
-     * Attribut l'observation a la mati�re
+     * Attribut l'observation a la matière
      * @param observation
      */
 	public void setObservation(String observation) {
@@ -77,7 +80,7 @@ public class CMatiereParam {
 	}
 
     /**
-     * Indique l'observation de la mati�re
+     * Indique l'observation de la matière
      * @return un nom d'observation
      */
     public String getObservation() {
@@ -85,7 +88,7 @@ public class CMatiereParam {
     }
 
     /**
-     * Attribut l'enseignant a la mati�re
+     * Attribut l'enseignant a la matière
      * @param enseignant
      */
     public void setEnseignant(String enseignant) {
@@ -93,11 +96,11 @@ public class CMatiereParam {
     }
 
     /**
-     * Cr�er une mati�re � partir des param�tres de la mati�re
-     * @return une mati�re
+     * Créer une matière à partir des paramétres de la matière
+     * @return une matière
      */
-	public CMatiere createMatiere() {
-        CMatiere realMatiere = new CMatiere(this.nomMatiere, 0);
+	public Matiere createMatiere() {
+        Matiere realMatiere = new Matiere(this.nomMatiere, 0);
         return realMatiere;
 	}
 

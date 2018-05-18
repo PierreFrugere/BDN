@@ -1,13 +1,15 @@
-/**
- * pParametre correspond au paquetage de gestion de tous les param�tre extrait du fichier de param�trage
+/*
+ * ParamGeneral.java			18/05/2018
+ * 3iL - Projet Bulletin de Note - 2018
  */
 package parametre;
 
-
 /**
- * Param�trage g�n�rale globaux a tous les UE
+ * Classe représentant les paramètres généraux globaux à tous les UE
+ * @author WilliamHenry, BenjaminMazoyer & PierreFrugere
+ * @version 2.0
  */
-public class CParamGeneral {
+public class ParamGeneral {
 
     /** Note minimale pour validation UE */
 	private float validationUE;
@@ -18,18 +20,18 @@ public class CParamGeneral {
 
 	
 	/**
-	 * Constructeur qui requi�re les informations globales des UE
-	 * @param valid note de validation n�cessaire pour valider l'UE
-	 * @param min note de minimale n�cessaire pour pouvoir compenser l'UE
+	 * Constructeur qui requière les informations globales des UE
+	 * @param valid note de validation nécessaire pour valider l'UE
+	 * @param min note de minimale nécessaire pour pouvoir compenser l'UE
 	 */
-	public CParamGeneral(float valid, float min, float valMat){
+	public ParamGeneral(float valid, float min, float valMat){
 		this.setValidationUE(valid);
 		this.setNoteMini(min);
         this.setValidationMatiere(valMat);
 	}
 
 	/**
-	 * Retourne la note n�cessaire � la validation d'un UE
+	 * Retourne la note nécessaire à la validation d'un UE
 	 * @return la valeur float
 	 */
 	public float getValidationUE() {
@@ -37,7 +39,7 @@ public class CParamGeneral {
 	}
 
 	/**
-	 * Fixe une note n�cessaire � la validation d'un UE
+	 * Fixe une note nécessaire à la validation d'un UE
 	 * @param validationUE la note
 	 */
 	public void setValidationUE(float validationUE) {
@@ -45,7 +47,7 @@ public class CParamGeneral {
 	}
 
 	/**
-     * Retourne la note n�cessaire pour pouvoir compenser l'UE
+     * Retourne la note nécessaire pour pouvoir compenser l'UE
      * @return la note
      */
     public float getNoteMini() {
@@ -53,7 +55,7 @@ public class CParamGeneral {
     }
 
     /**
-     * Fixe une note n�cessaire pour pouvoir compenser l'UE
+     * Fixe une note nécessaire pour pouvoir compenser l'UE
      * @param noteMini la note
      */
     public void setNoteMini(float noteMini) {
@@ -61,7 +63,7 @@ public class CParamGeneral {
     }
 
     /**
-     * Retourne la note n�cessaire pour pouvoir valider de facon sur une matiere
+     * Retourne la note nécessaire pour pouvoir valider de facon sur une matiere
      * @return la note
      */
     public float getValidationMatiere() {
@@ -69,7 +71,7 @@ public class CParamGeneral {
     }
 
     /**
-     * Fixe une note n�cessaire pour pouvoir valider de facon sur une matiere
+     * Fixe une note nécessaire pour pouvoir valider de facon sur une matiere
      * @param noteVal la note
      */
     public void setValidationMatiere(float noteVal) {

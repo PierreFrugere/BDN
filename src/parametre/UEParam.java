@@ -1,28 +1,31 @@
-/**
- * pParametre correspond au paquetage de gestion de tous les param�tre extrait du fichier de param�trage
+/*
+ * UEParam.java			18/05/2018
+ * 3iL - Projet Bulletin de Note - 2018
  */
 package parametre;
 
 import java.util.ArrayList;
 
 /**
- * Les param�tres en rapport avec les UE
+ * Classe représentant les paramètres en rapport avec les UE
+ * @author WilliamHenry, BenjaminMazoyer & PierreFrugere
+ * @version 2.0
  */
-public class CUEParam {
+public class UEParam {
 
 	private String nomUE;
 	private float ECTS;
 	private float coeffUE;
-	private ArrayList<CMatiereParam> matieres = new ArrayList<CMatiereParam>();
+	private ArrayList<MatiereParam> matieres = new ArrayList<MatiereParam>();
 
     /**
-     * Constructeur stocke tous les param�tres n�cessaires � la gestion des UE
+     * Constructeur stocke tous les paramètres nécessaires à la gestion des UE
      * @param nom de l'UE
      * @param credit de l'UE
      * @param coeff de l'UE
-     * @param listeMatiere liste des mati�res de l'UE
+     * @param listeMatiere liste des matières de l'UE
      */
-	public CUEParam(String nom, float credit, float coeff, ArrayList<CMatiereParam> listeMatiere){
+	public UEParam(String nom, float credit, float coeff, ArrayList<MatiereParam> listeMatiere){
 		this.setNomUE(nom);
 		this.setECTSUE(credit);
 		this.setCoeffUE(coeff);
@@ -30,12 +33,12 @@ public class CUEParam {
 	}
 
     /**
-     * Constructeur stocke tous les param�tres n�cessaires � la gestion des UE sans la liste des mati�res de l'UE
+     * Constructeur stocke tous les paramétres nécessaires à la gestion des UE sans la liste des matières de l'UE
      * @param nom de l'UE
      * @param credit de l'UE
      * @param coeff de l'UE
      */
-	public CUEParam(String nom, float credit, float coeff){
+	public UEParam(String nom, float credit, float coeff){
 		this.setNomUE(nom);
 		this.setECTSUE(credit);
 		this.setCoeffUE(coeff);
@@ -91,28 +94,28 @@ public class CUEParam {
 	}
 
     /**
-     * Retourne la liste des mati�res associ�es � l'UE
-     * @return la liste des mati�res
+     * Retourne la liste des matières associées à l'UE
+     * @return la liste des matière
      */
-    public ArrayList<CMatiereParam> getMatieresUE() {
+    public ArrayList<MatiereParam> getMatieresUE() {
         return this.matieres;
     }
 
     /**
-     * Attribut une liste de mati�res a l'UE
-     * @param listeMatiere liste de mati�res associ� � l'UE
+     * Attribut une liste de matière a l'UE
+     * @param listeMatiere liste de matière associé à l'UE
      */
-    public void setMatieresUE(ArrayList<CMatiereParam> listeMatiere) {
-        for (CMatiereParam matiere : listeMatiere) {
+    public void setMatieresUE(ArrayList<MatiereParam> listeMatiere) {
+        for (MatiereParam matiere : listeMatiere) {
             this.matieres.add(matiere);
         }
     }
 
     /**
-     * Ajoute une mati�re a la liste des mati�res de l'UE
-     * @param matiere la mati�re a ajout�
+     * Ajoute une matiére a la liste des matière de l'UE
+     * @param matiere la matiére à ajouter
      */
-    public void setMatieresUE(CMatiereParam matiere){
+    public void setMatieresUE(MatiereParam matiere){
         this.matieres.add(matiere);
     }
 
@@ -124,7 +127,7 @@ public class CUEParam {
     public String toString() {
         String liste_matiere_string;
         liste_matiere_string = "";
-        for (CMatiereParam matiere : matieres) {
+        for (MatiereParam matiere : matieres) {
             liste_matiere_string += matiere.toString();
         }
         return ("Unite d'enseignement parametrage{ Nom: " + getNomUE() + " Credit:" + getECTSUE() + " Coeficient: " + getCoeffUE() + " Liste matieres: {" + liste_matiere_string + "}} " );
