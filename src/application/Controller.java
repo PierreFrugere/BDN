@@ -68,13 +68,13 @@ public class Controller {
      */
     
     @FXML // fx:id="jfxCB_Promotion"
-    private JFXComboBox<String> jbxCB_Promotion;		// Promotion Combo box
+    private JFXComboBox<String> jfxCB_Promotion;		// Promotion Combo box
     
-    @FXML // fx:id="jbxCB_Annee"
-    private JFXComboBox<String> jbxCB_Annee;			// Annee Combo box
+    @FXML // fx:id="jfxCB_Annee"
+    private JFXComboBox<String> jfxCB_Annee;			// Annee Combo box
     
-    @FXML // fx:id="jbxCB_Eleve"
-    private JFXComboBox<String> jbxCB_Eleve;			// Eleve Combo box
+    @FXML // fx:id="jfxCB_Eleve"
+    private JFXComboBox<String> jfxCB_Eleve;			// Eleve Combo box
     
     /*
      * Tabs
@@ -138,7 +138,7 @@ public class Controller {
     	Collections.sort(listPromosSansDoublons);
     	
     	for (String elm: listAnneesSansDoublons) {
-    		System.out.println("Liste Années: " + elm);
+    		System.out.println("Liste Annï¿½es: " + elm);
     	}
     	
     	for (String elm: listPromosSansDoublons) {
@@ -147,10 +147,10 @@ public class Controller {
     	
     	// Add List of YEAR and PROMOTION to respective Combo box
     	ObservableList<String> promotionComboBoxList = FXCollections.observableArrayList(listPromosSansDoublons);
-    	jbxCB_Promotion = new JFXComboBox<String>(promotionComboBoxList);
+    	jfxCB_Promotion = new JFXComboBox<String>(promotionComboBoxList);
     	
     	ObservableList<String> anneeComboBoxList = FXCollections.observableArrayList(listAnneesSansDoublons);
-    	jbxCB_Annee = new JFXComboBox<String>(anneeComboBoxList);
+    	jfxCB_Annee = new JFXComboBox<String>(anneeComboBoxList);
     	
     	// Extract Eleves
     	ArrayList<Eleve> listEleves = new ArrayList<Eleve>();
