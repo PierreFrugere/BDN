@@ -5,18 +5,24 @@
 package application;
 
 import java.io.File;
+import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 
 import gestion.*;
-
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import metier.Eleve;
 
 /**
  * Controller de la vue "application.fxml"
@@ -58,6 +64,19 @@ public class Controller {
     
     
     /*
+     * Combo Box
+     */
+    
+    @FXML // fx:id="jfxCB_Promotion"
+    private JFXComboBox<String> jbxCB_Promotion;		// Promotion Combo box
+    
+    @FXML // fx:id="jbxCB_Annee"
+    private JFXComboBox<String> jbxCB_Annee;			// Annee Combo box
+    
+    @FXML // fx:id="jbxCB_Eleve"
+    private JFXComboBox<String> jbxCB_Eleve;			// Eleve Combo box
+    
+    /*
      * Tabs
      */
     
@@ -84,6 +103,70 @@ public class Controller {
 	private void initialize() {
 		// Initialise selectionModel value during instanciation
 		this.selectionModel = tp_principal.getSelectionModel();
+		
+		// Gettings infos to fill combo boxes
+		String[] listFichiers;
+    	String cheminFichier = new Extracteur("ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Resources");
+    	File repertoire = new File(cheminFichier);
+    	
+    	listFichiers = repertoire.list();
+    	
+    	ArrayList<String> listPromo = new ArrayList<String>();
+    	ArrayList<String> listAnnee = new ArrayList<String>();    
+    	ArrayList<String> listPromosSansDoublons = new ArrayList<String>();
+    	ArrayList<String> listAnneesSansDoublons = new ArrayList<String>();
+    	
+    	for (int cpt = 0; cpt < listFichiers.length; cpt++) {
+    		if (listFichiers[cpt].endsWith(".csv")) {
+    			if (listFichiers[cpt].length() > 11) {
+    				listAnnee.add(listFichiers[cpt].substring(7, 11));
+    				listPromo.add(listFichiers[cpt].substring(0, 7));
+    			}
+    		}
+    	}
+    	
+    	// Remove duplicates from YEARS ArrayList ans sort list
+    	Set<String> set = new HashSet<>();
+    	set.addAll(listAnnee);
+    	listAnneesSansDoublons.addAll(set);
+    	Collections.sort(listAnneesSansDoublons);
+    	
+    	// Remove duplicates from PROMO ArrayList and sort list
+    	set.clear();
+    	set.addAll(listPromo);
+    	listPromosSansDoublons.addAll(set);
+    	Collections.sort(listPromosSansDoublons);
+    	
+    	for (String elm: listAnneesSansDoublons) {
+    		System.out.println("Liste Ann�es: " + elm);
+    	}
+    	
+    	for (String elm: listPromosSansDoublons) {
+    		System.out.println("Liste Promos: " + elm);
+    	}
+    	
+    	// Add List of YEAR and PROMOTION to respective Combo box
+    	ObservableList<String> promotionComboBoxList = FXCollections.observableArrayList(listPromosSansDoublons);
+    	jbxCB_Promotion = new JFXComboBox<String>(promotionComboBoxList);
+    	
+    	ObservableList<String> anneeComboBoxList = FXCollections.observableArrayList(listAnneesSansDoublons);
+    	jbxCB_Annee = new JFXComboBox<String>(anneeComboBoxList);
+    	
+    	// Extract Eleves
+    	ArrayList<Eleve> listEleves = new ArrayList<Eleve>();
+    	Extracteur extracteurEleve = new Extracteur(cheminFichier + "\\Promo11ING1.csv");
+    	
+    	try {
+			listEleves = extracteurEleve.ExtracteurEleves("Promo11ING1");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	for (Eleve elm: listEleves) {
+    		System.out.println("Eleve: " + elm.getPrenomEleve() + " " + elm.getNomEleve());
+    	}
+		
 	}
 
 	/*
@@ -121,38 +204,7 @@ public class Controller {
     
     @FXML
     private void handleEditionButtonBulletinIndividuel(ActionEvent event) {
-    	String[] listFichiers;
-    	String cheminFichier = new Extracteur("ressources/ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Resources");
-    	File repertoire = new File(cheminFichier);
-    	
-    	System.out.println("cheminFichier: " + cheminFichier);
-    	System.out.println("Repertoire: " + repertoire.getAbsolutePath());
-    	
-    	System.out.println("is directory: " + repertoire.isDirectory());
-    	
-     	listFichiers = repertoire.list();
-     	System.out.println("list of files: " + listFichiers);
-//    	
-//    	ArrayList<String> listSansDoublonsPromo = new ArrayList<String>();
-//    	ArrayList<String> listSansDoublonsAnnee = new ArrayList<String>();    
-//    	
-//    	for (int cpt = 0; cpt < listFichiers.length; cpt++) {
-//    		if (listFichiers[cpt].endsWith(".csv")) {
-//    			if (listFichiers[cpt].length() > 11) {
-//    				listSansDoublonsAnnee.add(listFichiers[cpt].substring(7, 11));
-//    				listSansDoublonsPromo.add(listFichiers[cpt].substring(0, 7));
-//    			}
-//    		}
-//    	}
-//    	
-//    	for (String elm: listSansDoublonsAnnee) {
-//    		System.out.println("Liste années" + elm);
-//    	}
-//    	
-//    	for (String elm: listSansDoublonsPromo) {
-//    		System.out.println("Liste années" + elm);
-//    	}
-    	
+    	    	
     }
 
 }
