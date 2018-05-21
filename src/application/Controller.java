@@ -122,11 +122,16 @@ public class Controller {
     @FXML
     private void handleEditionButtonBulletinIndividuel(ActionEvent event) {
     	String[] listFichiers;
-    	String cheminFichier = new Extracteur("..\\ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Ressources");
+    	String cheminFichier = new Extracteur("ressources/ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Resources");
+    	File repertoire = new File(cheminFichier);
     	
     	System.out.println("cheminFichier: " + cheminFichier);
+    	System.out.println("Repertoire: " + repertoire.getAbsolutePath());
     	
-//    	listFichiers = repertoire.list();
+    	System.out.println("is directory: " + repertoire.isDirectory());
+    	
+     	listFichiers = repertoire.list();
+     	System.out.println("list of files: " + listFichiers);
 //    	
 //    	ArrayList<String> listSansDoublonsPromo = new ArrayList<String>();
 //    	ArrayList<String> listSansDoublonsAnnee = new ArrayList<String>();    
