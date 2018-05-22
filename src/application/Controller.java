@@ -5,10 +5,7 @@
 package application;
 
 import java.io.File;
-<<<<<<< HEAD
 import java.io.IOException;
-=======
->>>>>>> ab36d7d6a58bfcaaa4cefd2c5b3d6e2f75f856be
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -75,7 +72,6 @@ public class Controller {
     @FXML // fx:id="jfxCB_Promotion"
     private JFXComboBox<String> jfxCB_Promotion;		// Promotion Combo box
     
-<<<<<<< HEAD
     @FXML // fx:id="jbxCB_Annee"
     private JFXComboBox<String> jfxCB_Annee;			// Annee Combo box
     
@@ -85,14 +81,6 @@ public class Controller {
     @FXML // fx:id="test"
     private ComboBox<String> test;
     
-=======
-    @FXML // fx:id="jfxCB_Annee"
-    private JFXComboBox<String> jfxCB_Annee;			// Annee Combo box
-    
-    @FXML // fx:id="jfxCB_Eleve"
-    private JFXComboBox<String> jfxCB_Eleve;			// Eleve Combo box
-    
->>>>>>> ab36d7d6a58bfcaaa4cefd2c5b3d6e2f75f856be
     /*
      * Tabs
      */
@@ -129,58 +117,27 @@ public class Controller {
 		
 		// Gettings infos to fill combo boxes
 		String[] listFichiers;
-<<<<<<< HEAD
     	this.cheminFichier = new Extracteur("ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Resources");
     	File repertoire = new File(this.cheminFichier);
-=======
-    	String cheminFichier = new Extracteur("ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Resources");
-    	File repertoire = new File(cheminFichier);
->>>>>>> ab36d7d6a58bfcaaa4cefd2c5b3d6e2f75f856be
     	
     	listFichiers = repertoire.list();
     	
     	ArrayList<String> listPromo = new ArrayList<String>();
-<<<<<<< HEAD
-//    	ArrayList<String> listAnnee = new ArrayList<String>();    
     	ArrayList<String> listPromosSansDoublons = new ArrayList<String>();
-//    	ArrayList<String> listAnneesSansDoublons = new ArrayList<String>();
-=======
-    	ArrayList<String> listAnnee = new ArrayList<String>();    
-    	ArrayList<String> listPromosSansDoublons = new ArrayList<String>();
-    	ArrayList<String> listAnneesSansDoublons = new ArrayList<String>();
->>>>>>> ab36d7d6a58bfcaaa4cefd2c5b3d6e2f75f856be
     	
     	for (int cpt = 0; cpt < listFichiers.length; cpt++) {
     		if (listFichiers[cpt].endsWith(".csv")) {
     			if (listFichiers[cpt].length() > 11) {
-<<<<<<< HEAD
-//    				listAnnee.add(listFichiers[cpt].substring(7, 11));
-=======
-    				listAnnee.add(listFichiers[cpt].substring(7, 11));
->>>>>>> ab36d7d6a58bfcaaa4cefd2c5b3d6e2f75f856be
     				listPromo.add(listFichiers[cpt].substring(0, 7));
     			}
     		}
     	}
     	
-    	// Remove duplicates from YEARS ArrayList ans sort list
-    	Set<String> set = new HashSet<>();
-<<<<<<< HEAD
-//    	set.addAll(listAnnee);
-//    	listAnneesSansDoublons.addAll(set);
-//    	listAnneesSansDoublons.add(""); 		// Adding empty value to reset combo
-//    	Collections.sort(listAnneesSansDoublons);
-=======
-    	set.addAll(listAnnee);
-    	listAnneesSansDoublons.addAll(set);
-    	Collections.sort(listAnneesSansDoublons);
->>>>>>> ab36d7d6a58bfcaaa4cefd2c5b3d6e2f75f856be
-    	
     	// Remove duplicates from PROMO ArrayList and sort list
+    	Set<String> set = new HashSet<>();
     	set.clear();
     	set.addAll(listPromo);
     	listPromosSansDoublons.addAll(set);
-<<<<<<< HEAD
     	listPromosSansDoublons.add("");			// Adding empty value to reset combo
     	Collections.sort(listPromosSansDoublons);
     	
@@ -198,23 +155,11 @@ public class Controller {
 		// Disabling Year combo box
 		jfxCB_Annee.setDisable(true);
 		jfxCB_Annee.setValue("");
-=======
     	Collections.sort(listPromosSansDoublons);
-    	
-    	for (String elm: listAnneesSansDoublons) {
-    		System.out.println("Liste Ann�es: " + elm);
-    	}
     	
     	for (String elm: listPromosSansDoublons) {
     		System.out.println("Liste Promos: " + elm);
     	}
-    	
-    	// Add List of YEAR and PROMOTION to respective Combo box
-    	ObservableList<String> promotionComboBoxList = FXCollections.observableArrayList(listPromosSansDoublons);
-    	jfxCB_Promotion = new JFXComboBox<String>(promotionComboBoxList);
-    	
-    	ObservableList<String> anneeComboBoxList = FXCollections.observableArrayList(listAnneesSansDoublons);
-    	jfxCB_Annee = new JFXComboBox<String>(anneeComboBoxList);
     	
     	// Extract Eleves
     	ArrayList<Eleve> listEleves = new ArrayList<Eleve>();
@@ -231,7 +176,6 @@ public class Controller {
     		System.out.println("Eleve: " + elm.getPrenomEleve() + " " + elm.getNomEleve());
     	}
 		
->>>>>>> ab36d7d6a58bfcaaa4cefd2c5b3d6e2f75f856be
 	}
 
 	/*
@@ -269,7 +213,6 @@ public class Controller {
     
     @FXML
     private void handleEditionButtonBulletinIndividuel(ActionEvent event) {
-<<<<<<< HEAD
     	
     	// Retrieve index of selected student
     	int indexOfSelectedStudent = jfxCB_Eleve.getSelectionModel().getSelectedIndex();
@@ -382,9 +325,6 @@ public class Controller {
     		jfxCB_Annee.getItems().clear();
     		jfxCB_Annee.setValue("");
     	}
-=======
-    	    	
->>>>>>> ab36d7d6a58bfcaaa4cefd2c5b3d6e2f75f856be
     }
 
 }
