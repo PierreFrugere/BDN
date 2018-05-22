@@ -139,8 +139,13 @@
                                 <Font size="14.0" />
                             </font>
                         </Label>
+<<<<<<< HEAD
                         <JFXComboBox fx:id="jfxCB_Promotion" layoutX="300.0" layoutY="80.0" onAction="#promoIsFilled" prefHeight="26.0" prefWidth="125.0" />
                         <JFXComboBox fx:id="jfxCB_Annee" layoutX="300.0" layoutY="129.0" onAction="#yearAndPromoAreFilled" prefHeight="26.0" prefWidth="125.0" />
+=======
+                        <JFXComboBox fx:id="jfxCB_Promotion" layoutX="300.0" layoutY="80.0" prefHeight="26.0" prefWidth="125.0" />
+                        <JFXComboBox fx:id="jfxCB_Annee" layoutX="300.0" layoutY="129.0" prefHeight="26.0" prefWidth="125.0" />
+>>>>>>> ab36d7d6a58bfcaaa4cefd2c5b3d6e2f75f856be
                         <JFXComboBox fx:id="jfxCB_Eleve" layoutX="300.0" layoutY="182.0" prefHeight="26.0" prefWidth="125.0" />
                         <JFXButton buttonType="RAISED" layoutX="255.0" layoutY="249.0" onAction="#handleEditionButtonBulletinIndividuel" prefHeight="39.0" prefWidth="89.0" style="-fx-background-color: #3498db;" text="Edition">
                             <ripplerFill>
