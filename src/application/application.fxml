@@ -139,10 +139,10 @@
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <JFXComboBox fx:id="jfxCB_Promotion" layoutX="300.0" layoutY="80.0" onAction="#promoIsFilled" prefHeight="26.0" prefWidth="125.0" />
-                        <JFXComboBox fx:id="jfxCB_Annee" layoutX="300.0" layoutY="129.0" onAction="#yearAndPromoAreFilled" prefHeight="26.0" prefWidth="125.0" />
-                        <JFXComboBox fx:id="jfxCB_Eleve" layoutX="300.0" layoutY="182.0" prefHeight="26.0" prefWidth="125.0" />
-                        <JFXButton buttonType="RAISED" layoutX="255.0" layoutY="249.0" onAction="#handleEditionButtonBulletinIndividuel" prefHeight="39.0" prefWidth="89.0" style="-fx-background-color: #3498db;" text="Edition">
+                        <JFXComboBox fx:id="jfxCB_PromotionInd" layoutX="300.0" layoutY="80.0" onAction="#promoIsFilledOnBulletinIndiv" prefHeight="26.0" prefWidth="125.0" />
+                        <JFXComboBox fx:id="jfxCB_AnneeInd" layoutX="300.0" layoutY="129.0" onAction="#yearAndPromoAreFilled" prefHeight="26.0" prefWidth="125.0" />
+                        <JFXComboBox fx:id="jfxCB_EleveInd" layoutX="300.0" layoutY="182.0" prefHeight="26.0" prefWidth="125.0" />
+                        <JFXButton fx:id="jfxb_EditionBilanIndividuel" buttonType="RAISED" layoutX="255.0" layoutY="249.0" onAction="#handleEditionButtonBulletinIndividuel" prefHeight="39.0" prefWidth="89.0" style="-fx-background-color: #3498db;" text="Edition">
                             <ripplerFill>
                                 <LinearGradient endX="1.0" endY="1.0">
                                     <stops>
@@ -167,11 +167,11 @@
                 </AnchorPane>
             </content>
         </Tab>
-        <Tab fx:id="t_recapTroisAn" text="RÃ©cap 3 ans">
+        <Tab fx:id="t_recapTroisAn" text="Récap 3 ans">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ecf0f1;">
                     <children>
-                        <Label layoutX="213.0" layoutY="14.0" text="RÃ©capitulatif sur 3 ans">
+                        <Label layoutX="213.0" layoutY="14.0" text="Récapitulatif sur 3 ans">
                             <font>
                                 <Font size="18.0" />
                             </font>
@@ -208,16 +208,16 @@
                 </AnchorPane>
             </content>
         </Tab>
-        <Tab fx:id="t_bulletinGeneral" text="Bulletin gÃ©nÃ©ral">
+        <Tab fx:id="t_bulletinGeneral" text="Bulletin général">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ecf0f1;">
                     <children>
-                        <Label layoutX="238.0" layoutY="14.0" text="Bulletin gÃ©nÃ©ral">
+                        <Label layoutX="238.0" layoutY="14.0" text="Bulletin général">
                             <font>
                                 <Font size="18.0" />
                             </font>
                         </Label>
-                        <JFXButton buttonType="RAISED" layoutX="255.0" layoutY="266.0" prefHeight="39.0" prefWidth="89.0" style="-fx-background-color: #3498db;" text="Edition" />
+                        <JFXButton fx:id="jfxb_EditionBulletinGeneral" buttonType="RAISED" layoutX="255.0" layoutY="266.0" prefHeight="39.0" prefWidth="89.0" style="-fx-background-color: #3498db;" text="Edition" />
                         <Label layoutX="210.0" layoutY="84.0" text="Promotion">
                             <font>
                                 <Font size="14.0" />
@@ -228,8 +228,8 @@
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <JFXComboBox layoutX="300.0" layoutY="82.0" prefHeight="26.0" prefWidth="145.0" />
-                        <JFXComboBox layoutX="300.0" layoutY="137.0" prefHeight="26.0" prefWidth="145.0" />
+                        <JFXComboBox fx:id="jfxCB_PromotionGen" layoutX="300.0" layoutY="82.0" prefHeight="26.0" prefWidth="145.0" />
+                        <JFXComboBox fx:id="jfxCB_AnneeGen" layoutX="300.0" layoutY="137.0" prefHeight="26.0" prefWidth="145.0" />
                   <JFXButton fx:id="jfxb_HomeFromBulletinGeneral" buttonType="RAISED" layoutX="14.0" layoutY="12.0" onAction="#handleReturnHomeAction" style="-fx-background-color: #3498db #3498db;" text="Accueil">
                      <ripplerFill>
                         <LinearGradient endX="1.0" endY="1.0">

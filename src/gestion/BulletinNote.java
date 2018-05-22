@@ -27,6 +27,9 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+
 /**
  * Classe qui rassemble toutes les donnÃ©es et outils permettant de manipuler les bulletins de notes
  * @author WilliamHenry, BenjaminMazoyer & PierreFrugere
@@ -66,17 +69,33 @@ public class BulletinNote {
         File fichierIndiv = new File(cheminFichierGeneral+"\\Individuels"+ NomFichierPromo + Promo +".xls");
 
         if( !fichierGeneral.exists() ) {
-        	// TODO JAVAFX
-        	//javax.swing.JOptionPane.showMessageDialog(null, "Fichier " + NomFichierPromo+Promo+".csv introuvable" );
+        	// JAVAFX Alert
+        	Alert alert = new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Information");
+        	alert.setHeaderText("Information");
+        	alert.setContentText("Fichier " + NomFichierPromo+Promo+".csv introuvable");
+        	alert.showAndWait();
         } else if ( !fichierParam.exists() ) {
-        	// TODO JAVAFX
-        	//javax.swing.JOptionPane.showMessageDialog(null, "Fichier " + NomFichierPromo + Promo+".xml introuvable" );
+        	// JAVAFX Alert
+        	Alert alert = new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Information");
+        	alert.setHeaderText("Information");
+        	alert.setContentText("Fichier " + NomFichierPromo + Promo+".xml introuvable");
+        	alert.showAndWait();
         } else if ( !fichierIndiv.exists() ) {
-        	// TODO JAVAFX
-        	//javax.swing.JOptionPane.showMessageDialog(null, "Fichier Individuels"+ NomFichierPromo + Promo +".xls introuvable" );
+        	// JAVAFX Alert
+        	Alert alert = new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Information");
+        	alert.setHeaderText("Information");
+        	alert.setContentText("Fichier Individuels"+ NomFichierPromo + Promo +".xls introuvable");
+        	alert.showAndWait();
         } else {
-        	// TODO JAVAFX
-            //javax.swing.JOptionPane.showMessageDialog(null, "Gï¿½nï¿½ration des bulletins individuel en cours");
+        	// JAVAFX Alert
+        	Alert alert = new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Information");
+        	alert.setHeaderText("Information");
+        	alert.setContentText("Génération des bulletins individuels en cours");
+        	alert.showAndWait();
 
             //
             Extracteur Extraction = new Extracteur(cheminFichierGeneral+"\\" + NomFichierPromo + Promo + ".csv");
@@ -193,7 +212,7 @@ public class BulletinNote {
                 listeRow.get(3).createCell(6).setCellValue("Formation:");
                 listeRow.get(3).createCell(7).setCellValue("3iL ingénieur");
                 // deuxieme ligne d'info
-                listeRow.get(5).createCell(0).setCellValue("Prï¿½nom: " + eleves_extrait.get(cptEleve).getPrenomEleve());
+                listeRow.get(5).createCell(0).setCellValue("Prénom: " + eleves_extrait.get(cptEleve).getPrenomEleve());
                 listeRow.get(5).createCell(6).setCellValue("Classe:");
                 switch(eleves_extrait.get(cptEleve).getPromoEleve()) {
                     case "ING1": listeRow.get(5).createCell(7).setCellValue("1ère année");
@@ -500,8 +519,13 @@ public class BulletinNote {
                 e.printStackTrace();
             }
 
-         // TODO JAVAFX
-            //javax.swing.JOptionPane.showMessageDialog(null, "Bulletins individuel gï¿½nï¿½rï¿½ !");
+            // JAVAFX Alert
+        	alert = new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Information");
+        	alert.setHeaderText("Information");
+        	alert.setContentText("Bulletins individuels générés");
+        	alert.showAndWait();
+            
         }
     }
 
@@ -522,22 +546,39 @@ public class BulletinNote {
         File fichierIndiv = new File(cheminFichierGeneral+"\\Individuels" + NomFichierPromo + Promo + ".xls");
 
         if( !fichierGeneral.exists() ) {
-        	// TODO JAVAFX
-            //javax.swing.JOptionPane.showMessageDialog(null, "Fichier " + NomFichierPromo+Promo+".csv introuvable" );
+        	// JAVAFX Alert
+        	Alert alert = new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Information");
+        	alert.setHeaderText("Information");
+        	alert.setContentText("Fichier " + NomFichierPromo+Promo+".csv introuvable");
+        	alert.showAndWait();
         } else if ( !fichierParam.exists() ) {
-        	// TODO JAVAFX
-            //javax.swing.JOptionPane.showMessageDialog(null, "Fichier " + "Parametrage-"+NomFichierPromo + Promo+".xml introuvable" );
+        	// JAVAFX Alert
+        	Alert alert = new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Information");
+        	alert.setHeaderText("Information");
+        	alert.setContentText("Fichier " + "Parametrage-"+NomFichierPromo + Promo+".xml introuvable");
+        	alert.showAndWait();
         } else if ( !fichierIndiv.exists() ) {
-        	// TODO JAVAFX
-            //javax.swing.JOptionPane.showMessageDialog(null, "Fichier Individuels" + NomFichierPromo+Promo + ".xls introuvable" );
+        	// JAVAFX Alert
+        	Alert alert = new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Information");
+        	alert.setHeaderText("Information");
+        	alert.setContentText("Fichier Individuels" + NomFichierPromo+Promo + ".xls introuvable");
+        	alert.showAndWait();
         } else {
-        	// TODO JAVAFX
-            //javax.swing.JOptionPane.showMessageDialog(null, "Gï¿½nï¿½ration des bulletins individuel en cours");
+        	// JAVAFX Alert
+        	Alert alert = new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Information");
+        	alert.setHeaderText("Information");
+        	alert.setContentText("Fichier " + "Génération des bulletins individuel en cours");
+        	alert.showAndWait();
 
             Extracteur Extraction = new Extracteur(cheminFichierGeneral+"\\" + NomFichierPromo + Promo + ".csv");
             ArrayList<Eleve> eleves_extrait = Extraction.ExtracteurEleves(NomFichierPromo + Promo);
             eleves_extrait = Extraction.ExtracteurNotesToutesAnnee(eleves_extrait);
             Extraction.setCheminFichier(cheminFichierGeneral+"\\Individuels"+NomFichierPromo+Promo+".xls");
+            alert.showAndWait();
 
             DecimalFormat df = new DecimalFormat();
             df.setMaximumFractionDigits(2);
@@ -975,8 +1016,13 @@ public class BulletinNote {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-                //javax.swing.JOptionPane.showMessageDialog(null, "Bulletin individuel gï¿½nï¿½rï¿½ !");
+                
+                // JAVAFX Alert
+            	alert = new Alert(AlertType.INFORMATION);
+            	alert.setTitle("Information");
+            	alert.setHeaderText("Information");
+            	alert.setContentText("Bulletin Individuel généré");
+            	alert.showAndWait();
             }
         }
     }
@@ -1000,17 +1046,27 @@ public class BulletinNote {
         double moyenneUE=0,sommeCoeffMat=0,sommeNoteUE=0;
         cptMat=0;
         if( !fichierGeneral.exists() ) {
-        	// TODO JAVAFX
-        	//javax.swing.JOptionPane.showMessageDialog(null, "Fichier " + NomFichierPromo+Promo+".csv introuvable" );
+        	// JAVAFX Alert
+        	Alert alert = new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Information");
+        	alert.setHeaderText("Information");
+        	alert.setContentText("Fichier " + NomFichierPromo+Promo+".csv introuvable");
+        	alert.showAndWait();
         } else if ( !fichierParam.exists() ) {
-        	// TODO JAVAFX
-        	//javax.swing.JOptionPane.showMessageDialog(null, "Fichier Parametrage-"+NomFichierPromo + Promo+".xml introuvable" );
-        } /*else if ( !fichierIndiv.exists() ) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Fichier " + "ressources\\projet.xls introuvable" );
-        }*/ else {
-        	// TODO JAVAFX
-        	//javax.swing.JOptionPane.showMessageDialog(null, "GÃ©nÃ©ration du bulletin gÃ©nÃ©ral en cours");
-            //
+        	// JAVAFX Alert
+        	Alert alert = new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Information");
+        	alert.setHeaderText("Information");
+        	alert.setContentText("Fichier Parametrage-"+NomFichierPromo + Promo+".xml introuvable");
+        	alert.showAndWait();
+        } else {
+        	// JAVAFX Alert
+        	Alert alert = new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Information");
+        	alert.setHeaderText("Information");
+        	alert.setContentText("Génération du bulletin général en cours");
+        	alert.showAndWait();
+        	
             Extracteur Extraction = new Extracteur(cheminFichierGeneral+"\\" + NomFichierPromo + Promo + ".csv");
             ArrayList<Eleve> eleves_extrait = Extraction.ExtracteurEleves(NomFichierPromo + Promo);
             eleves_extrait = Extraction.ExtracteurNotesToutesAnnee(eleves_extrait);
@@ -1817,8 +1873,13 @@ public class BulletinNote {
         } catch (IOException e) {
             e.printStackTrace();
         }
-     // TODO JAVAFX
-        //javax.swing.JOptionPane.showMessageDialog(null, "Bulletin gï¿½nï¿½ral gï¿½nï¿½rï¿½ !");
+     
+        // JAVAFX Alert
+        alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText("Information");
+        alert.setContentText("Bulletin général généré");
+        alert.showAndWait();
         }
     }
 
@@ -1844,14 +1905,26 @@ public class BulletinNote {
         df.setMaximumFractionDigits(2);
 
         if( !fichierGeneral.exists() ) {
-        	// TODO JAVAFX
-        	//javax.swing.JOptionPane.showMessageDialog(null, "Fichier " + NomFichierPromo + Promo+".csv introuvable" );
+        	// JAVAFX Alert
+        	Alert alert = new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Information");
+        	alert.setHeaderText("Information");
+        	alert.setContentText("Fichier " + NomFichierPromo + Promo+".csv introuvable");
+        	alert.showAndWait();
         } else if ( !fichierParam.exists() ) {
-        	// TODO JAVAFX
-        	//javax.swing.JOptionPane.showMessageDialog(null, "Fichier " + NomFichierPromo + Promo+".xml introuvable" );
+        	// JAVAFX Alert
+        	Alert alert = new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Information");
+        	alert.setHeaderText("Information");
+        	alert.setContentText("Fichier " + NomFichierPromo + Promo+".xml introuvable");
+        	alert.showAndWait();
         } else {
-        	// TODO JAVAFX
-        	//javax.swing.JOptionPane.showMessageDialog(null, "Gï¿½nï¿½ration du bilan de compensation en cours");
+        	// JAVAFX Alert
+        	Alert alert = new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Information");
+        	alert.setHeaderText("Information");
+        	alert.setContentText("Génération du bilan de compensation en cours");
+        	alert.showAndWait();
 
             ParamGeneral extractParam = new Extracteur(cheminFichierParam+"\\Parametrage-" + NomFichierPromo + Promo + ".xml").ExtracteurParametresGeneraux();
             Extracteur extractEleve = new Extracteur(cheminFichierGeneral+"\\" + NomFichierPromo + Promo + ".csv");
@@ -1998,8 +2071,13 @@ public class BulletinNote {
                 e.printStackTrace();
             }
 
-         // TODO JAVAFX
-            //javax.swing.JOptionPane.showMessageDialog(null, "Bilan de compensation gï¿½nï¿½rï¿½ !");
+            // JAVAFX Alert
+        	alert = new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Information");
+        	alert.setHeaderText("Information");
+        	alert.setContentText("Bilan de compensation généré");
+        	alert.showAndWait();
+            
         }
     }
 
@@ -2028,30 +2106,54 @@ public class BulletinNote {
         i=0;
         
         if( !fichierGeneral1.exists() ) {
-        	// TODO JAVAFX
-        	//javax.swing.JOptionPane.showMessageDialog(null, "Fichier " +NomFichierPromo+"ING1.csv introuvable" );
+        	// JAVAFX Alert
+        	Alert alert = new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Information");
+        	alert.setHeaderText("Information");
+        	alert.setContentText("Fichier " +NomFichierPromo+"ING1.csv introuvable");
+        	alert.showAndWait();
         } else if ( !fichierGeneral2.exists() ) {
-        	// TODO JAVAFX
-        	//javax.swing.JOptionPane.showMessageDialog(null, "Fichier " +NomFichierPromo+"ING2.csv introuvable" );
+        	// JAVAFX Alert
+        	Alert alert = new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Information");
+        	alert.setHeaderText("Information");
+        	alert.setContentText("Fichier " +NomFichierPromo+"ING2.csv introuvable");
+        	alert.showAndWait();
         } else if ( !fichierGeneral3.exists() ) {
-        	// TODO JAVAFX
-        	//javax.swing.JOptionPane.showMessageDialog(null, "Fichier " +NomFichierPromo+"ING3.csv introuvable" );
+        	// JAVAFX Alert
+        	Alert alert = new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Information");
+        	alert.setHeaderText("Information");
+        	alert.setContentText("Fichier " +NomFichierPromo+"ING3.csv introuvable");
+        	alert.showAndWait();
         } else if ( !fichierParam3.exists() ) {
-        	// TODO JAVAFX
-        	//javax.swing.JOptionPane.showMessageDialog(null, "Fichier Parametrage-"+NomFichierPromo + "ING3.xml introuvable" );
+        	// JAVAFX Alert
+        	Alert alert = new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Information");
+        	alert.setHeaderText("Information");
+        	alert.setContentText("Fichier Parametrage-"+NomFichierPromo + "ING3.xml introuvable");
+        	alert.showAndWait();
         } else if ( !fichierParam2.exists() ) {
-        	// TODO JAVAFX
-        	//javax.swing.JOptionPane.showMessageDialog(null, "Fichier Parametrage-"+NomFichierPromo + "ING2.xml introuvable" );
+        	// JAVAFX Alert
+        	Alert alert = new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Information");
+        	alert.setHeaderText("Information");
+        	alert.setContentText("Fichier Parametrage-"+NomFichierPromo + "ING2.xml introuvable");
+        	alert.showAndWait();
         } else if ( !fichierParam1.exists() ) {
-        	// TODO JAVAFX
-        	//javax.swing.JOptionPane.showMessageDialog(null, "Fichier Parametrage-"+NomFichierPromo + "ING1.xml introuvable" );
-        } /*else if ( !fichierIndiv.exists() ) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Fichier " + "ressources\\projet.xls introuvable" );
-        }*/ else {
-        	// TODO JAVAFX
-        	//javax.swing.JOptionPane.showMessageDialog(null, "Gï¿½nï¿½ration du rï¿½capitulatif sur 3 ans en cours");
-            //
-            
+        	// JAVAFX Alert
+        	Alert alert = new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Information");
+        	alert.setHeaderText("Information");
+        	alert.setContentText("Fichier Parametrage-"+NomFichierPromo + "ING1.xml introuvable");
+        	alert.showAndWait();
+        } else {
+        	// JAVAFX Alert
+        	Alert alert = new Alert(AlertType.INFORMATION);
+        	alert.setTitle("Information");
+        	alert.setHeaderText("Information");
+        	alert.setContentText("Génération récapitulatif sur 3 ans en cours");
+        	alert.showAndWait();
             
 
             ParamGeneral extractParam1 = new Extracteur(cheminFichierParam+"\\Parametrage-" + NomFichierPromo + "ING1" + ".xml").ExtracteurParametresGeneraux();
@@ -2425,8 +2527,13 @@ public class BulletinNote {
         } catch (IOException e) {
             e.printStackTrace();
         }
-     // TODO JAVAFX
-    	//javax.swing.JOptionPane.showMessageDialog(null, "Rï¿½capitulatif sur 3 ans gï¿½nï¿½rï¿½ !");
+
+        // JAVAFX Alert
+    	alert = new Alert(AlertType.INFORMATION);
+    	alert.setTitle("Information");
+    	alert.setHeaderText("Information");
+    	alert.setContentText("Récapitulatif sur 3 ans généré");
+    	alert.showAndWait();
         }
 
         

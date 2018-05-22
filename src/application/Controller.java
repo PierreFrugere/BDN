@@ -64,22 +64,31 @@ public class Controller {
     @FXML //  fx:id="jfxb_HomeFromBulletinGeneral"
     private JFXButton jfxb_HomeFromBulletinGeneral; // "Bulletin GÃ©nÃ©ral" Home Button
     
+    @FXML //  fx:id="jfxb_EditionBilanIndividuel"
+    private JFXButton jfxb_EditionBilanIndividuel; // "Bulletin Individuel Edition Button
+    
+    @FXML //  fx:id="jfxb_EditionBulletinGeneral"
+    private JFXButton jfxb_EditionBulletinGeneral; // "Bulletin Général Edition Button
+    
     
     /*
      * Combo Box
      */
     
-    @FXML // fx:id="jfxCB_Promotion"
-    private JFXComboBox<String> jfxCB_Promotion;		// Promotion Combo box
+    @FXML // fx:id="jfxCB_PromotionInd"
+    private JFXComboBox<String> jfxCB_PromotionInd;		// Promotion Combo box
     
-    @FXML // fx:id="jbxCB_Annee"
-    private JFXComboBox<String> jfxCB_Annee;			// Annee Combo box
+    @FXML // fx:id="jfxCB_AnneeInd"
+    private JFXComboBox<String> jfxCB_AnneeInd;			// Annee Combo box
     
-    @FXML // fx:id="jbxCB_Eleve"
-    private JFXComboBox<String> jfxCB_Eleve;			// Eleve Combo box
+    @FXML // fx:id="jfxCB_EleveInd"
+    private JFXComboBox<String> jfxCB_EleveInd;			// Eleve Combo box
     
-    @FXML // fx:id="test"
-    private ComboBox<String> test;
+    @FXML // fx:id="jfxCB_PromotionGen"
+    private JFXComboBox<String> jfxCB_PromotionGen;		// Promotion Combo box Bulletin General
+    
+    @FXML // fx:id="jfxCB_AnneeGen"
+    private JFXComboBox<String> jfxCB_AnneeGen;			// Annee Combo box Bulletin General
     
     /*
      * Tabs
@@ -113,14 +122,195 @@ public class Controller {
 	@FXML
 	private void initialize() {
 		// Initialise selectionModel value during instanciation
-		this.selectionModel = tp_principal.getSelectionModel();
+		this.selectionModel = tp_principal.getSelectionModel();	
 		
-		// Gettings infos to fill combo boxes
-		String[] listFichiers;
+		// Initialize Bilan individuel tab
+		this.initialiseBilanIndividuelTab();
+	}
+
+	/*
+	 * Button Actions
+	 */
+    @FXML
+    private void handleHomeBilanCompensationAction(ActionEvent event) {   	
+    	// Switch to "Bilan de compensation" Tab
+    	this.selectionModel.select(t_bilanCompensation);
+    }
+    
+    @FXML
+    private void handleHomeBulletinIndividuelAction(ActionEvent event) {   	
+    	// Switch to "Bulletin Individuel" Tab
+    	this.selectionModel.select(t_bilanIndividuel);
+    	
+    	// Initialize the view content
+    	this.initialiseBilanIndividuelTab();
+    }
+    
+    @FXML
+    private void handleHomeRecapTroisAnsAction(ActionEvent event) {   	
+    	// Switch to "Recap sur 3 ans" Tab
+    	this.selectionModel.select(t_recapTroisAn);
+    }
+    
+    @FXML
+    private void handleHomeBulletinGeneralAction(ActionEvent event) {   	
+    	// Switch to "Bulletin Général" Tab
+    	this.selectionModel.select(t_bulletinGeneral);
+    }
+    
+    @FXML
+    private void handleReturnHomeAction(ActionEvent event) {   	
+    	// Switch to "Accueil" Tab
+    	this.selectionModel.select(t_accueil);
+    }
+    
+    @FXML
+    private void handleEditionButtonBulletinIndividuel(ActionEvent event) {
+    	
+    	if (jfxCB_EleveInd.getSelectionModel().getSelectedItem() != "") {
+    		// Retrieve index of selected student
+        	int indexOfSelectedStudent = jfxCB_EleveInd.getSelectionModel().getSelectedIndex();
+        	
+        	// Retrieve selected Eleve object
+        	if (!this.listEleves.isEmpty()) {
+        		Eleve selectedEleve = this.listEleves.get(indexOfSelectedStudent);
+        		System.out.println("Selected Student: " + selectedEleve.getPrenomEleve() + " " + selectedEleve.getNomEleve() + "\tAt Index: " + indexOfSelectedStudent);
+        		
+        		BulletinNote bulletin = new BulletinNote(selectedEleve.getNomEleve(), selectedEleve.getPrenomEleve(), selectedEleve.getPromoEleve(), 11, 7, "01011970");
+        		try {
+    				bulletin.bulletinIndividuel(selectedEleve.getNomEleve(), selectedEleve.getPrenomEleve(), jfxCB_AnneeInd.getValue(), jfxCB_PromotionInd.getValue());
+    			} catch (ParseException | IOException e) {
+    				e.printStackTrace();
+    			}
+        	}
+    	} else {
+    		BulletinNote bulletin = new BulletinNote("", "", jfxCB_PromotionInd.getValue(), 11, 7, "01011970");
+    		try {
+				bulletin.bulletinIndividuel(jfxCB_AnneeInd.getValue(), jfxCB_PromotionInd.getValue());
+			} catch (ParseException | IOException e) {
+				e.printStackTrace();
+			}
+    	}
+    	
+    	
+      	
+    }
+    
+    @FXML
+    private void yearAndPromoAreFilled(ActionEvent event) {
+    	// Retrieving year and promotion selected by user
+    	String year = "";
+    	String promo = "";
+    	if (jfxCB_AnneeInd.getValue() != null) {
+    		year = jfxCB_AnneeInd.getValue();
+    	}
+    	
+    	if (jfxCB_PromotionInd.getValue() != null) {
+    		promo = jfxCB_PromotionInd.getValue();
+    	}
+    	
+    	if (year != "" && promo != "") {
+    		// Extract Eleves depending on selected promotion and year
+        	Extracteur extracteurEleve = new Extracteur(this.cheminFichier + "\\" + promo + year + ".csv");
+        	
+        	try {
+        		
+    			this.listEleves = extracteurEleve.ExtracteurEleves(promo + year);
+    			
+    			// Getting a list of eleves name and firstname
+    			ArrayList<String> listeEleveByNameAndFirstName = new ArrayList<String>();
+    			
+    			for (Eleve eleve: this.listEleves) {
+    				listeEleveByNameAndFirstName.add(eleve.getPrenomEleve() + " " + eleve.getNomEleve());
+    			}
+    			
+    			// Set list of eleves into the combo box
+    			ObservableList<String> elevesComboBoxList = FXCollections.observableArrayList(listeEleveByNameAndFirstName);
+    			jfxCB_EleveInd.getItems().clear();
+    	    	jfxCB_EleveInd.getItems().addAll(elevesComboBoxList);
+    	    	
+    	    	// Enabling Eleves Combo box
+    	    	jfxCB_EleveInd.setDisable(false);
+    	    	
+    	    	// Enabling Edition Button
+    	    	jfxb_EditionBilanIndividuel.setDisable(false);
+ 
+    		} catch (ParseException e) {
+    			e.printStackTrace();
+    		}
+    	} else {
+    		// Disabling eleves combo box
+    		jfxCB_EleveInd.setDisable(true);
+    		jfxCB_EleveInd.getItems().clear();
+    		jfxCB_EleveInd.setValue("");
+    		
+    		// Disabling Edition Button
+    		jfxb_EditionBilanIndividuel.setDisable(true);
+    	}
+    }
+    
+    @FXML
+    private void promoIsFilledOnBulletinIndiv(ActionEvent event) {
+    	String promo = "";
+    	ArrayList<String> listAnneesSansDoublons = new ArrayList<String>();
+    	
+    	if (jfxCB_PromotionInd.getValue() != "") {
+    		promo = jfxCB_PromotionInd.getValue();
+    		
+    		listAnneesSansDoublons = this.retrieveAvailableAnneeByPromo(promo);
+        	
+        	// Adding content in combo box
+        	ObservableList<String> anneeComboBoxList = FXCollections.observableArrayList(listAnneesSansDoublons);
+        	jfxCB_AnneeInd.getItems().clear();
+        	jfxCB_AnneeInd.getItems().addAll(anneeComboBoxList);
+        	
+        	// Enabling comboBox
+        	jfxCB_AnneeInd.setDisable(false);
+        	
+    	} else {
+    		jfxCB_AnneeInd.setDisable(true);
+    		jfxCB_AnneeInd.getItems().clear();
+    		jfxCB_AnneeInd.setValue("");
+    		jfxb_EditionBilanIndividuel.setDisable(true);
+    	}
+    }
+    
+    private void initialiseBilanIndividuelTab() {
+    	    	ArrayList<String> listPromosSansDoublons = new ArrayList<String>();
+    	    	
+    	    	listPromosSansDoublons = this.retrieveAvailablePromos();
+    	    	
+    	    	// Add List of YEAR and PROMOTION to respective Combo box
+    	    	ObservableList<String> promotionComboBoxList = FXCollections.observableArrayList(listPromosSansDoublons);
+    	    	jfxCB_PromotionInd.getItems().addAll(promotionComboBoxList);
+    	    	
+    	    	// Disabling Eleves combo box
+    	    	jfxCB_EleveInd.setDisable(true);
+    			jfxCB_EleveInd.setValue("");
+    			
+    			// Disabling Year combo box
+    			jfxCB_AnneeInd.setDisable(true);
+    			jfxCB_AnneeInd.setValue("");
+    			
+    			// Disabling Edition button
+    			jfxb_EditionBilanIndividuel.setDisable(true);
+    }
+    
+    private String[] retrieveListOfFiles() {
+    	
+    	// Gettings infos to fill combo boxes
+    	String[] listFichiers;
     	this.cheminFichier = new Extracteur("ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Resources");
     	File repertoire = new File(this.cheminFichier);
-    	
+
     	listFichiers = repertoire.list();
+    	
+    	return listFichiers;
+    }
+    
+    private ArrayList<String> retrieveAvailablePromos() {
+    	
+    	String[] listFichiers = this.retrieveListOfFiles();
     	
     	ArrayList<String> listPromo = new ArrayList<String>();
     	ArrayList<String> listPromosSansDoublons = new ArrayList<String>();
@@ -141,181 +331,34 @@ public class Controller {
     	listPromosSansDoublons.add("");			// Adding empty value to reset combo
     	Collections.sort(listPromosSansDoublons);
     	
-    	// Add List of YEAR and PROMOTION to respective Combo box
-    	ObservableList<String> promotionComboBoxList = FXCollections.observableArrayList(listPromosSansDoublons);
-    	jfxCB_Promotion.getItems().addAll(promotionComboBoxList);
-    	
-//    	ObservableList<String> anneeComboBoxList = FXCollections.observableArrayList(listAnneesSansDoublons);
-//    	jfxCB_Annee.getItems().addAll(anneeComboBoxList);
-    	
-    	// Disabling Eleves combo box
-    	jfxCB_Eleve.setDisable(true);
-		jfxCB_Eleve.setValue("");
-		
-		// Disabling Year combo box
-		jfxCB_Annee.setDisable(true);
-		jfxCB_Annee.setValue("");
-    	Collections.sort(listPromosSansDoublons);
-    	
-    	// Extract Eleves
-    	ArrayList<Eleve> listEleves = new ArrayList<Eleve>();
-    	Extracteur extracteurEleve = new Extracteur(cheminFichier + "\\Promo11ING1.csv");
-    	
-    	try {
-			listEleves = extracteurEleve.ExtracteurEleves("Promo11ING1");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		
-	}
-
-	/*
-	 * Button Actions
-	 */
-    @FXML
-    private void handleHomeBilanCompensationAction(ActionEvent event) {   	
-    	// Switch to "Bilan de compensation" Tab
-    	this.selectionModel.select(t_bilanCompensation);
+    	return listPromosSansDoublons;
     }
     
-    @FXML
-    private void handleHomeBulletinIndividuelAction(ActionEvent event) {   	
-    	// Switch to "Bulletin Individuel" Tab
-    	this.selectionModel.select(t_bilanIndividuel);
-    }
-    
-    @FXML
-    private void handleHomeRecapTroisAnsAction(ActionEvent event) {   	
-    	// Switch to "Recap sur 3 ans" Tab
-    	this.selectionModel.select(t_recapTroisAn);
-    }
-    
-    @FXML
-    private void handleHomeBulletinGeneralAction(ActionEvent event) {   	
-    	// Switch to "Bulletin GÃ©nÃ©ral" Tab
-    	this.selectionModel.select(t_bulletinGeneral);
-    }
-    
-    @FXML
-    private void handleReturnHomeAction(ActionEvent event) {   	
-    	// Switch to "Accueil" Tab
-    	this.selectionModel.select(t_accueil);
-    }
-    
-    @FXML
-    private void handleEditionButtonBulletinIndividuel(ActionEvent event) {
+    private ArrayList<String> retrieveAvailableAnneeByPromo(String promo) {
     	
-    	// Retrieve index of selected student
-    	int indexOfSelectedStudent = jfxCB_Eleve.getSelectionModel().getSelectedIndex();
-    	
-    	// Retrieve selected Eleve object
-    	if (!this.listEleves.isEmpty()) {
-    		Eleve selectedEleve = this.listEleves.get(indexOfSelectedStudent);
-    		System.out.println("Selected Student: " + selectedEleve.getPrenomEleve() + " " + selectedEleve.getNomEleve() + "\tAt Index: " + indexOfSelectedStudent);
-    		
-    		BulletinNote bulletin = new BulletinNote(selectedEleve.getNomEleve(), selectedEleve.getPrenomEleve(), selectedEleve.getPromoEleve(), 11, 7, "01011970");
-    		try {
-				bulletin.bulletinIndividuel(selectedEleve.getNomEleve(), selectedEleve.getPrenomEleve(), jfxCB_Annee.getValue(), jfxCB_Promotion.getValue());
-			} catch (ParseException | IOException e) {
-				e.printStackTrace();
-			}
-    	}
-      	
-    }
-    
-    @FXML
-    private void yearAndPromoAreFilled(ActionEvent event) {
-    	// Retrieving year and promotion selected by user
-    	String year = "";
-    	String promo = "";
-    	if (jfxCB_Annee.getValue() != null) {
-    		year = jfxCB_Annee.getValue();
-    	}
-    	
-    	if (jfxCB_Promotion.getValue() != null) {
-    		promo = jfxCB_Promotion.getValue();
-    	}
-    	
-    	if (year != "" && promo != "") {
-    		// Extract Eleves depending on selected promotion and year
-        	Extracteur extracteurEleve = new Extracteur(this.cheminFichier + "\\" + promo + year + ".csv");
-        	
-        	try {
-        		
-    			this.listEleves = extracteurEleve.ExtracteurEleves(promo + year);
-    			
-    			// Getting a list of eleves name and firstname
-    			ArrayList<String> listeEleveByNameAndFirstName = new ArrayList<String>();
-    			for (Eleve eleve: this.listEleves) {
-    				listeEleveByNameAndFirstName.add(eleve.getPrenomEleve() + " " + eleve.getNomEleve());
-    			}
-    			
-    			// Set list of eleves into the combo box
-    			ObservableList<String> elevesComboBoxList = FXCollections.observableArrayList(listeEleveByNameAndFirstName);
-    			jfxCB_Eleve.getItems().clear();
-    	    	jfxCB_Eleve.getItems().addAll(elevesComboBoxList);
-    	    	
-    	    	// Enabling Eleves Combo box
-    	    	jfxCB_Eleve.setDisable(false);
- 
-    		} catch (ParseException e) {
-    			e.printStackTrace();
-    		}
-    	} else {
-    		// Disabling eleves combo box
-    		jfxCB_Eleve.setDisable(true);
-    		jfxCB_Eleve.getItems().clear();
-    		jfxCB_Eleve.setValue("");
-    	}
-    }
-    
-    @FXML
-    private void promoIsFilled(ActionEvent event) {
-    	String promo = "";
     	ArrayList<String> listAnnee = new ArrayList<String>(); 
     	ArrayList<String> listAnneesSansDoublons = new ArrayList<String>();
     	
     	// Gettings infos to fill combo boxes
-    	String[] listFichiers;
-    	this.cheminFichier = new Extracteur("ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Resources");
-    	File repertoire = new File(this.cheminFichier);
-    	    	
-    	listFichiers = repertoire.list();
-    	
-    	if (jfxCB_Promotion.getValue() != "") {
-    		promo = jfxCB_Promotion.getValue();
-    		
-    		listAnnee.clear();
-    		
-    		for (int cpt = 0; cpt < listFichiers.length; cpt++) {
-        		if (listFichiers[cpt].endsWith(".csv")) {
-        			if (listFichiers[cpt].length() > 11 && listFichiers[cpt].contains(promo)) {
-        				listAnnee.add(listFichiers[cpt].substring(7, 11));
-        			}
-        		}
-        	}
-    		
-    		// Remove duplicates from YEARS ArrayList ans sort list
-        	Set<String> set = new HashSet<>();
-        	set.addAll(listAnnee);
-        	listAnneesSansDoublons.clear();
-        	listAnneesSansDoublons.addAll(set);
-        	listAnneesSansDoublons.add(""); 		// Adding empty value to reset combo
-        	Collections.sort(listAnneesSansDoublons);
-        	
-        	// Adding content in combo box
-        	ObservableList<String> anneeComboBoxList = FXCollections.observableArrayList(listAnneesSansDoublons);
-        	jfxCB_Annee.getItems().clear();
-        	jfxCB_Annee.getItems().addAll(anneeComboBoxList);
-        	
-        	// Enabling comboBox
-        	jfxCB_Annee.setDisable(false);
-        	
-    	} else {
-    		jfxCB_Annee.setDisable(true);
-    		jfxCB_Annee.getItems().clear();
-    		jfxCB_Annee.setValue("");
+    	String[] listFichiers = this.retrieveListOfFiles();
+		
+		for (int cpt = 0; cpt < listFichiers.length; cpt++) {
+    		if (listFichiers[cpt].endsWith(".csv")) {
+    			if (listFichiers[cpt].length() > 11 && listFichiers[cpt].contains(promo)) {
+    				listAnnee.add(listFichiers[cpt].substring(7, 11));
+    			}
+    		}
     	}
+		
+		// Remove duplicates from YEARS ArrayList ans sort list
+    	Set<String> set = new HashSet<>();
+    	set.addAll(listAnnee);
+    	listAnneesSansDoublons.clear();
+    	listAnneesSansDoublons.addAll(set);
+    	listAnneesSansDoublons.add(""); 		// Adding empty value to reset combo
+    	Collections.sort(listAnneesSansDoublons);
+    	
+    	return listAnneesSansDoublons;
     }
 
 }
