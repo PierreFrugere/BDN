@@ -226,7 +226,7 @@
                 </AnchorPane>
             </content>
         </Tab>
-        <Tab fx:id="t_recapTroisAn" text="Récap 3 ans">
+        <Tab fx:id="t_recapTroisAns" text="Récap 3 ans">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ecf0f1;">
                     <children>
@@ -235,7 +235,7 @@
                                 <Font size="18.0" />
                             </font>
                         </Label>
-                        <JFXButton buttonType="RAISED" layoutX="274.0" layoutY="263.0" prefHeight="38.0" prefWidth="89.0" style="-fx-background-color: #3498db;" text="Edition">
+                        <JFXButton fx:id="jfxb_EditionRecapTroisAns" buttonType="RAISED" layoutX="274.0" layoutY="263.0" onAction="#handleEditionButtonRecapTroisAns" prefHeight="38.0" prefWidth="89.0" style="-fx-background-color: #3498db;" text="Edition">
                             <ripplerFill>
                                 <LinearGradient endX="1.0" endY="1.0">
                                     <stops>
@@ -251,7 +251,7 @@
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <JFXComboBox layoutX="291.0" layoutY="93.0" prefHeight="26.0" prefWidth="126.0" />
+                        <JFXComboBox fx:id="jfxCB_PromotionRecap" layoutX="291.0" layoutY="93.0" onAction="#promoIsFilledOnRecapTroisAns" prefHeight="26.0" prefWidth="126.0" />
                   <JFXButton fx:id="jfxb_HomeFromRecapTroisAns" buttonType="RAISED" layoutX="14.0" layoutY="12.0" onAction="#handleReturnHomeAction" style="-fx-background-color: #3498db #3498db;" text="Accueil">
                      <ripplerFill>
                         <LinearGradient endX="1.0" endY="1.0">

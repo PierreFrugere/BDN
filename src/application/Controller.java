@@ -71,7 +71,10 @@ public class Controller {
     private JFXButton jfxb_EditionBulletinGeneral; // "Bulletin Général Edition Button
     
     @FXML //  fx:id="jfxb_EditionBilanCompensation"
-    private JFXButton jfxb_EditionBilanCompensation; // "Bulletin Général Edition Button
+    private JFXButton jfxb_EditionBilanCompensation; // "Bilan Compensation Edition Button
+    
+    @FXML //  fx:id="jfxb_EditionRecapTroisAns"
+    private JFXButton jfxb_EditionRecapTroisAns; // "Récap sur 3 ans Edition Button
     
     
     /*
@@ -99,6 +102,9 @@ public class Controller {
     @FXML // fx:id="jfxCB_AnneeComp"
     private JFXComboBox<String> jfxCB_AnneeComp;		// Annee Combo box Bilan de compensation
     
+    @FXML // fx:id="jfxCB_PromotionRecap"
+    private JFXComboBox<String> jfxCB_PromotionRecap;	// Promotion Combo box Récap sur 3 ans
+    
     /*
      * Tabs
      */
@@ -112,8 +118,8 @@ public class Controller {
     @FXML //  fx:id="t_bilanIndividuel"
     private Tab t_bilanIndividuel; // "Bilan Individuel" Tab
     
-    @FXML //  fx:id="t_recapTroisAn"
-    private Tab t_recapTroisAn; // "RÃ©cap 3 ans" Tab
+    @FXML //  fx:id="t_recapTroisAns"
+    private Tab t_recapTroisAns; // "RÃ©cap 3 ans" Tab
     
     @FXML //  fx:id="t_bulletinGeneral"
     private Tab t_bulletinGeneral; // "Bulletin GÃ©nÃ©ral" Tab
@@ -128,6 +134,9 @@ public class Controller {
     ArrayList<Eleve> listEleves = new ArrayList<Eleve>();
 	
     
+    /*
+     * Initialise all scene on first show
+     */
 	@FXML
 	private void initialize() {
 		// Initialise selectionModel value during instanciation
@@ -141,6 +150,9 @@ public class Controller {
 		
 		// Initialise Bilan Compensation Tab
 		this.initialiseBilanCompensationTab();
+		
+		// Initialise Recap sur 3 ans Tab
+		this.initialiseRecapTroisAnsTab();
 	}
 
 	/*
@@ -161,7 +173,7 @@ public class Controller {
     @FXML
     private void handleHomeRecapTroisAnsAction(ActionEvent event) {   	
     	// Switch to "Recap sur 3 ans" Tab
-    	this.selectionModel.select(t_recapTroisAn);
+    	this.selectionModel.select(t_recapTroisAns);
     }
     
     @FXML
@@ -230,6 +242,15 @@ public class Controller {
 		}
     }
     
+    @FXML
+    private void handleEditionButtonRecapTroisAns(ActionEvent event) {
+    	BulletinNote bulletin = new BulletinNote("", "", jfxCB_PromotionRecap.getValue(), 11, 7, "01011970");
+		try {
+			bulletin.recapSur3ans(jfxCB_PromotionRecap.getValue());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+    }
     
     /*
      * Behavior of UI changing depending on combo box value
@@ -403,6 +424,23 @@ public class Controller {
     
     
     /*
+     * Behavior of UI changing depending on combo box value
+     * For the Récapitulatif 3 ans Tab
+     */
+    
+    @FXML
+    private void promoIsFilledOnRecapTroisAns(ActionEvent event) {
+    	
+    	// If the year is selected the edition is possible, otherwise it's not
+    	if (jfxCB_PromotionRecap.getValue() != "") {
+    		jfxb_EditionRecapTroisAns.setDisable(false);
+    	} else {
+    		jfxb_EditionRecapTroisAns.setDisable(true);
+    	}
+    }
+    
+    
+    /*
      * Initialise the behavior of the tabs
      */
     
@@ -459,6 +497,19 @@ public class Controller {
     	
     	// Disabling edition button
     	jfxb_EditionBilanCompensation.setDisable(true);
+    }
+    
+    private void initialiseRecapTroisAnsTab() {
+    	ArrayList<String> listPromosSansDoublons = new ArrayList<String>();
+    	
+    	listPromosSansDoublons = this.retrieveAvailablePromos();
+    	
+    	// Add List of PROMOTION to respective Combo box
+    	ObservableList<String> promotionComboBoxList = FXCollections.observableArrayList(listPromosSansDoublons);
+    	jfxCB_PromotionRecap.getItems().addAll(promotionComboBoxList);
+    	
+    	// Disabling edition button
+    	jfxb_EditionRecapTroisAns.setDisable(true);
     }
     
     
