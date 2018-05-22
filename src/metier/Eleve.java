@@ -63,7 +63,7 @@ public class Eleve {
         this.setCommentaireResponsable("");
         annee = new Annee(ING);
         Matiere Matiere;
-        String cheminFichierParam = new Extracteur("..\\ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Parametrages");
+        String cheminFichierParam = new Extracteur("ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Parametrages");
         Extracteur extracteurUE = new Extracteur(cheminFichierParam+"\\Parametrage-"+NomFichierParam+".xml");
         for(cptAnnee=1;cptAnnee<4;cptAnnee++) {
             ArrayList<UEParam> paramsUE = new ArrayList<UEParam>();

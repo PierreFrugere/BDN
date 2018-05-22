@@ -56,9 +56,9 @@ public class BulletinNote {
         int cptFeuil1, cptMatByUE, cptEleve, cptUE, offset, cptMat, nbMaxMat;
 
         //
-        String cheminFichierSortie= new Extracteur("..\\ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Sorties");
-        String cheminFichierGeneral = new Extracteur("..\\ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Resources");
-        String cheminFichierParam = new Extracteur("..\\ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Parametrages");
+        String cheminFichierSortie= new Extracteur("ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Sorties");
+        String cheminFichierGeneral = new Extracteur("ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Resources");
+        String cheminFichierParam = new Extracteur("ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Parametrages");
 
         //
         File fichierGeneral = new File(cheminFichierGeneral + "\\" + NomFichierPromo + Promo + ".csv");
@@ -66,13 +66,17 @@ public class BulletinNote {
         File fichierIndiv = new File(cheminFichierGeneral+"\\Individuels"+ NomFichierPromo + Promo +".xls");
 
         if( !fichierGeneral.exists() ) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Fichier " + NomFichierPromo+Promo+".csv introuvable" );
+        	// TODO JAVAFX
+        	//javax.swing.JOptionPane.showMessageDialog(null, "Fichier " + NomFichierPromo+Promo+".csv introuvable" );
         } else if ( !fichierParam.exists() ) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Fichier " + NomFichierPromo + Promo+".xml introuvable" );
+        	// TODO JAVAFX
+        	//javax.swing.JOptionPane.showMessageDialog(null, "Fichier " + NomFichierPromo + Promo+".xml introuvable" );
         } else if ( !fichierIndiv.exists() ) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Fichier Individuels"+ NomFichierPromo + Promo +".xls introuvable" );
+        	// TODO JAVAFX
+        	//javax.swing.JOptionPane.showMessageDialog(null, "Fichier Individuels"+ NomFichierPromo + Promo +".xls introuvable" );
         } else {
-            javax.swing.JOptionPane.showMessageDialog(null, "Gï¿½nï¿½ration des bulletins individuel en cours");
+        	// TODO JAVAFX
+            //javax.swing.JOptionPane.showMessageDialog(null, "Gï¿½nï¿½ration des bulletins individuel en cours");
 
             //
             Extracteur Extraction = new Extracteur(cheminFichierGeneral+"\\" + NomFichierPromo + Promo + ".csv");
@@ -187,16 +191,16 @@ public class BulletinNote {
 
                 listeRow.get(3).createCell(0).setCellValue("Nom: " + eleves_extrait.get(cptEleve).getNomEleve());
                 listeRow.get(3).createCell(6).setCellValue("Formation:");
-                listeRow.get(3).createCell(7).setCellValue("3iL ingï¿½nieur");
+                listeRow.get(3).createCell(7).setCellValue("3iL ingénieur");
                 // deuxieme ligne d'info
                 listeRow.get(5).createCell(0).setCellValue("Prï¿½nom: " + eleves_extrait.get(cptEleve).getPrenomEleve());
                 listeRow.get(5).createCell(6).setCellValue("Classe:");
                 switch(eleves_extrait.get(cptEleve).getPromoEleve()) {
-                    case "ING1": listeRow.get(5).createCell(7).setCellValue("1ï¿½re annï¿½e");
+                    case "ING1": listeRow.get(5).createCell(7).setCellValue("1ère année");
                         break;
-                    case "ING2":listeRow.get(5).createCell(7).setCellValue("2ï¿½me annï¿½e");
+                    case "ING2":listeRow.get(5).createCell(7).setCellValue("2ème année");
                         break;
-                    case "ING3": listeRow.get(5).createCell(7).setCellValue("3ï¿½me annï¿½e");
+                    case "ING3": listeRow.get(5).createCell(7).setCellValue("3ème année");
                         break;
                     default: listeRow.get(5).createCell(7).setCellValue("");
                 }
@@ -208,7 +212,7 @@ public class BulletinNote {
                         0, //mention first column of merging
                         5 //mention last column to include in merge
                 ));
-                listeRow.get(7).createCell(6).setCellValue("Nombre d'Ã©lÃ¨ves:");
+                listeRow.get(7).createCell(6).setCellValue("Nombre d'élèves:");
                 listeRow.get(7).createCell(7).setCellValue(eleves_extrait.size());
                 listeRow.get(7).getCell(7).setCellStyle(styleAlignLeft);
                 // Quatrieme ligne d'info
@@ -219,7 +223,7 @@ public class BulletinNote {
                 java.text.SimpleDateFormat formater = new java.text.SimpleDateFormat( format );
                 java.util.Date date = new java.util.Date();
 
-                listeRow.get(10).createCell(0).setCellValue("Relevï¿½ du " + formater.format( date ));
+                listeRow.get(10).createCell(0).setCellValue("Relevé du " + formater.format( date ));
 
                 /**
                  * Crï¿½ation des lignes pour les UE et les matieres
@@ -254,7 +258,7 @@ public class BulletinNote {
                     RegionUtil.setBorderLeft(HSSFCellStyle.BORDER_THIN, new CellRangeAddress(offset, offset, 1, 8), feuille, wb);
 
                     // Deuxieme ligne
-                    listeRow.get(offset + 1).createCell(1).setCellValue("Elï¿½ve");
+                    listeRow.get(offset + 1).createCell(1).setCellValue("Elève");
                     feuille.addMergedRegion(new CellRangeAddress(
                             offset + 1, // mention first row here
                             offset + 1, //mention last row here, it is 1 as we are doing a column wise merging
@@ -367,7 +371,7 @@ public class BulletinNote {
                 RegionUtil.setBorderTop(HSSFCellStyle.BORDER_THIN, new CellRangeAddress(offset + 1, offset + 1, 7, 8), feuille, wb);
                 RegionUtil.setBorderRight(HSSFCellStyle.BORDER_THIN, new CellRangeAddress(offset + 1, offset + 1, 7, 8), feuille, wb);
                 RegionUtil.setBorderLeft(HSSFCellStyle.BORDER_THIN, new CellRangeAddress(offset + 1, offset + 1, 7, 8), feuille, wb);
-                listeRow.get(offset + 2).createCell(0).setCellValue("Observation gï¿½nï¿½rales");
+                listeRow.get(offset + 2).createCell(0).setCellValue("Observation générales");
                 listeRow.get(offset + 2).getCell(0).setCellStyle(style);
                 listeRow.get(offset + 2).createCell(1).setCellValue(eleves_extrait.get(cptEleve).getCommentaire().replace("\n", " "));
                 feuille.addMergedRegion(new CellRangeAddress(
@@ -444,7 +448,7 @@ public class BulletinNote {
                 listeRow.get(offset + 6).getCell(6).setCellStyle(style);
                 listeRow.get(offset + 6).createCell(7).setCellValue("Observation");
                 listeRow.get(offset + 6).getCell(7).setCellStyle(style);
-                listeRow.get(offset + 6).createCell(8).setCellValue("Durï¿½e");
+                listeRow.get(offset + 6).createCell(8).setCellValue("Durée");
                 listeRow.get(offset + 6).getCell(8).setCellStyle(style);
 
                 listeRow.get(offset + 9).createCell(0).setCellValue("Cumul Types");
@@ -496,7 +500,8 @@ public class BulletinNote {
                 e.printStackTrace();
             }
 
-            javax.swing.JOptionPane.showMessageDialog(null, "Bulletins individuel gï¿½nï¿½rï¿½ !");
+         // TODO JAVAFX
+            //javax.swing.JOptionPane.showMessageDialog(null, "Bulletins individuel gï¿½nï¿½rï¿½ !");
         }
     }
 
@@ -507,9 +512,9 @@ public class BulletinNote {
         int cptFeuil1, cptMatByUE, cptEleve, cptUE, offset, cptMat, indexEleve, nbMaxMat;
 
         //
-        String cheminFichierSortie= new Extracteur("..\\ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Sorties");
-        String cheminFichierGeneral = new Extracteur("..\\ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Resources");
-        String cheminFichierParam = new Extracteur("..\\ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Parametrages");
+        String cheminFichierSortie= new Extracteur("ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Sorties");
+        String cheminFichierGeneral = new Extracteur("ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Resources");
+        String cheminFichierParam = new Extracteur("ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Parametrages");
 
         //
         File fichierGeneral = new File(cheminFichierGeneral + "\\" + NomFichierPromo + Promo + ".csv");
@@ -517,13 +522,17 @@ public class BulletinNote {
         File fichierIndiv = new File(cheminFichierGeneral+"\\Individuels" + NomFichierPromo + Promo + ".xls");
 
         if( !fichierGeneral.exists() ) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Fichier " + NomFichierPromo+Promo+".csv introuvable" );
+        	// TODO JAVAFX
+            //javax.swing.JOptionPane.showMessageDialog(null, "Fichier " + NomFichierPromo+Promo+".csv introuvable" );
         } else if ( !fichierParam.exists() ) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Fichier " + "Parametrage-"+NomFichierPromo + Promo+".xml introuvable" );
+        	// TODO JAVAFX
+            //javax.swing.JOptionPane.showMessageDialog(null, "Fichier " + "Parametrage-"+NomFichierPromo + Promo+".xml introuvable" );
         } else if ( !fichierIndiv.exists() ) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Fichier Individuels" + NomFichierPromo+Promo + ".xls introuvable" );
+        	// TODO JAVAFX
+            //javax.swing.JOptionPane.showMessageDialog(null, "Fichier Individuels" + NomFichierPromo+Promo + ".xls introuvable" );
         } else {
-            javax.swing.JOptionPane.showMessageDialog(null, "Gï¿½nï¿½ration des bulletins individuel en cours");
+        	// TODO JAVAFX
+            //javax.swing.JOptionPane.showMessageDialog(null, "Gï¿½nï¿½ration des bulletins individuel en cours");
 
             Extracteur Extraction = new Extracteur(cheminFichierGeneral+"\\" + NomFichierPromo + Promo + ".csv");
             ArrayList<Eleve> eleves_extrait = Extraction.ExtracteurEleves(NomFichierPromo + Promo);
@@ -616,7 +625,7 @@ public class BulletinNote {
 
             //System.out.println(Extraction.SearchIndexEleveIndividuel(eleves_extrait.get(cptEleve)));
             if (indexEleve == eleves_extrait.size() || Extraction.SearchIndexEleveIndividuel(eleves_extrait.get(indexEleve)) == -1) {
-                javax.swing.JOptionPane.showMessageDialog(null, "Erreur Ã©lÃ¨ve introuvable !");
+                //javax.swing.JOptionPane.showMessageDialog(null, "Erreur Ã©lÃ¨ve introuvable !");
             } else {
                 Extraction.ExtracteurInformationIndividuel(Extraction.SearchIndexEleveIndividuel(eleves_extrait.get(indexEleve)), eleves_extrait.get(indexEleve), eleves_extrait.get(indexEleve).getPromoEleve());
 
@@ -654,17 +663,17 @@ public class BulletinNote {
                 listeRow.get(3).createCell(0).setCellValue("Nom: " + eleves_extrait.get(indexEleve).getNomEleve());
                 //listeRow.get(3).createCell(1).setCellValue(eleves_extrait.get(indexEleve).getNomEleve());
                 listeRow.get(3).createCell(6).setCellValue("Formation:");
-                listeRow.get(3).createCell(7).setCellValue("3iL ingÃ©nieur");
+                listeRow.get(3).createCell(7).setCellValue("3iL ingénieur");
                 // deuxieme ligne d'info
-                listeRow.get(5).createCell(0).setCellValue("PrÃ©nom: " + eleves_extrait.get(indexEleve).getPrenomEleve());
+                listeRow.get(5).createCell(0).setCellValue("Prénom: " + eleves_extrait.get(indexEleve).getPrenomEleve());
                 //listeRow.get(5).createCell(1).setCellValue(eleves_extrait.get(indexEleve).getPrenomEleve());
                 listeRow.get(5).createCell(6).setCellValue("Classe:");
                 switch(eleves_extrait.get(indexEleve).getPromoEleve()) {
-                    case "ING1": listeRow.get(5).createCell(7).setCellValue("1Ã¨re annÃ©e");
+                    case "ING1": listeRow.get(5).createCell(7).setCellValue("1ère année");
                         break;
-                    case "ING2":listeRow.get(5).createCell(7).setCellValue("2Ã¨me annÃ©e");
+                    case "ING2":listeRow.get(5).createCell(7).setCellValue("2ème année");
                         break;
-                    case "ING3": listeRow.get(5).createCell(7).setCellValue("3Ã¨me annÃ©e");
+                    case "ING3": listeRow.get(5).createCell(7).setCellValue("3ème année");
                         break;
                     default: listeRow.get(5).createCell(7).setCellValue("");
                 }
@@ -677,7 +686,7 @@ public class BulletinNote {
                         5 //mention last column to include in merge
                 ));
                 //listeRow.get(7).createCell(1).setCellValue(eleves_extrait.get(indexEleve).getAdresse());
-                listeRow.get(7).createCell(6).setCellValue("Nombre d'Ã©lÃ¨ves:");
+                listeRow.get(7).createCell(6).setCellValue("Nombre d'élèves:");
                 listeRow.get(7).createCell(7).setCellValue(eleves_extrait.size());
                 listeRow.get(7).getCell(7).setCellStyle(styleAlignLeft);
                 // Quatrieme ligne d'info
@@ -688,7 +697,7 @@ public class BulletinNote {
                 java.text.SimpleDateFormat formater = new java.text.SimpleDateFormat( format );
                 java.util.Date date = new java.util.Date();
 
-                listeRow.get(10).createCell(0).setCellValue("RelevÃ© du " + formater.format( date ));
+                listeRow.get(10).createCell(0).setCellValue("Relevé du " + formater.format( date ));
                 //listeRow.get(9).createCell(1).setCellValue(eleves_extrait.get(indexEleve).getDateNaissance());
 
                 /**
@@ -724,7 +733,7 @@ public class BulletinNote {
                     RegionUtil.setBorderLeft(HSSFCellStyle.BORDER_THIN, new CellRangeAddress(offset, offset, 1, 8), feuille, wb);
 
                     // Deuxieme ligne
-                    listeRow.get(offset + 1).createCell(1).setCellValue("Elï¿½ve");
+                    listeRow.get(offset + 1).createCell(1).setCellValue("Elève");
                     feuille.addMergedRegion(new CellRangeAddress(
                             offset + 1, // mention first row here
                             offset + 1, //mention last row here, it is 1 as we are doing a column wise merging
@@ -839,7 +848,7 @@ public class BulletinNote {
                 RegionUtil.setBorderTop(HSSFCellStyle.BORDER_THIN, new CellRangeAddress(offset + 1, offset + 1, 7, 8), feuille, wb);
                 RegionUtil.setBorderRight(HSSFCellStyle.BORDER_THIN, new CellRangeAddress(offset + 1, offset + 1, 7, 8), feuille, wb);
                 RegionUtil.setBorderLeft(HSSFCellStyle.BORDER_THIN, new CellRangeAddress(offset + 1, offset + 1, 7, 8), feuille, wb);
-                listeRow.get(offset + 2).createCell(0).setCellValue("Observation gï¿½nï¿½rales");
+                listeRow.get(offset + 2).createCell(0).setCellValue("Observation générales");
                 listeRow.get(offset + 2).getCell(0).setCellStyle(style);
                 listeRow.get(offset + 2).createCell(1).setCellValue(eleves_extrait.get(indexEleve).getCommentaire().replace("\n", " "));
                 feuille.addMergedRegion(new CellRangeAddress(
@@ -916,7 +925,7 @@ public class BulletinNote {
                 listeRow.get(offset + 6).getCell(6).setCellStyle(style);
                 listeRow.get(offset + 6).createCell(7).setCellValue("Observation");
                 listeRow.get(offset + 6).getCell(7).setCellStyle(style);
-                listeRow.get(offset + 6).createCell(8).setCellValue("Durï¿½e");
+                listeRow.get(offset + 6).createCell(8).setCellValue("Durée");
                 listeRow.get(offset + 6).getCell(8).setCellStyle(style);
 
                 listeRow.get(offset + 9).createCell(0).setCellValue("Cumul Types");
@@ -967,7 +976,7 @@ public class BulletinNote {
                     e.printStackTrace();
                 }
 
-                javax.swing.JOptionPane.showMessageDialog(null, "Bulletin individuel gï¿½nï¿½rï¿½ !");
+                //javax.swing.JOptionPane.showMessageDialog(null, "Bulletin individuel gï¿½nï¿½rï¿½ !");
             }
         }
     }
@@ -979,30 +988,33 @@ public class BulletinNote {
     public void bulletinGeneral(String Promo, String NomFichierPromo) throws ParseException{
 
         //
-        String cheminFichierSortie= new Extracteur("..\\ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Sorties");
-        String cheminFichierGeneral = new Extracteur("..\\ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Resources");
-        String cheminFichierParam = new Extracteur("..\\ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Parametrages");
+        String cheminFichierSortie= new Extracteur("ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Sorties");
+        String cheminFichierGeneral = new Extracteur("ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Resources");
+        String cheminFichierParam = new Extracteur("ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Parametrages");
 
         File fichierGeneral = new File(cheminFichierGeneral+"\\"+NomFichierPromo+Promo+".csv");
         File fichierParam = new File(cheminFichierParam+"\\Parametrage-"+NomFichierPromo + Promo+".xml");
-        //File fichierIndiv = new File("..\\ressources\\projet.xls");
+        //File fichierIndiv = new File("ressources\\projet.xls");
         int i,j,cptEleve,k,offset, cptUE,cptMat,nbMaxMat,cptFormule;
         float sommeCoef=0,coeffMat=0;
         double moyenneUE=0,sommeCoeffMat=0,sommeNoteUE=0;
         cptMat=0;
         if( !fichierGeneral.exists() ) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Fichier " + NomFichierPromo+Promo+".csv introuvable" );
+        	// TODO JAVAFX
+        	//javax.swing.JOptionPane.showMessageDialog(null, "Fichier " + NomFichierPromo+Promo+".csv introuvable" );
         } else if ( !fichierParam.exists() ) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Fichier Parametrage-"+NomFichierPromo + Promo+".xml introuvable" );
+        	// TODO JAVAFX
+        	//javax.swing.JOptionPane.showMessageDialog(null, "Fichier Parametrage-"+NomFichierPromo + Promo+".xml introuvable" );
         } /*else if ( !fichierIndiv.exists() ) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Fichier " + "..\\ressources\\projet.xls introuvable" );
+            javax.swing.JOptionPane.showMessageDialog(null, "Fichier " + "ressources\\projet.xls introuvable" );
         }*/ else {
-            javax.swing.JOptionPane.showMessageDialog(null, "GÃ©nÃ©ration du bulletin gÃ©nÃ©ral en cours");
+        	// TODO JAVAFX
+        	//javax.swing.JOptionPane.showMessageDialog(null, "GÃ©nÃ©ration du bulletin gÃ©nÃ©ral en cours");
             //
             Extracteur Extraction = new Extracteur(cheminFichierGeneral+"\\" + NomFichierPromo + Promo + ".csv");
             ArrayList<Eleve> eleves_extrait = Extraction.ExtracteurEleves(NomFichierPromo + Promo);
             eleves_extrait = Extraction.ExtracteurNotesToutesAnnee(eleves_extrait);
-            //Extraction.setCheminFichier("..\\ressources\\projet.xls");
+            //Extraction.setCheminFichier("ressources\\projet.xls");
 
             //
             DecimalFormat df = new DecimalFormat();
@@ -1037,7 +1049,7 @@ public class BulletinNote {
         
         
         //2. Crï¿½er une Feuille de calcul vide
-        Sheet feuille = wb.createSheet("Bulletin gï¿½nï¿½ral");
+        Sheet feuille = wb.createSheet("Bulletin général");
         ArrayList<Row> listeRow = new ArrayList<Row>();
 
         // Crï¿½ation du nombre de lignes nï¿½cessaire pour la suite
@@ -1118,11 +1130,11 @@ public class BulletinNote {
        listeRow.get(3).getCell(0).setCellStyle(style);
        listeRow.get(4).createCell(0).setCellValue("Coeff UE");
        listeRow.get(4).getCell(0).setCellStyle(style);
-       listeRow.get(5).createCell(0).setCellValue("CrÃ©dit UE");
+       listeRow.get(5).createCell(0).setCellValue("Crédit UE");
        listeRow.get(5).getCell(0).setCellStyle(style);
-       listeRow.get(6).createCell(0).setCellValue("MatiÃ©re");
+       listeRow.get(6).createCell(0).setCellValue("Matière");
        listeRow.get(6).getCell(0).setCellStyle(style);
-       listeRow.get(7).createCell(0).setCellValue("Coeff matiÃ©re");
+       listeRow.get(7).createCell(0).setCellValue("Coeff matière");
        listeRow.get(7).getCell(0).setCellStyle(style);
        listeRow.get(8).createCell(0).setCellValue("Enseignant");
        listeRow.get(8).getCell(0).setCellStyle(style);
@@ -1787,7 +1799,7 @@ public class BulletinNote {
         RegionUtil.setBorderRight(HSSFCellStyle.BORDER_THIN, new CellRangeAddress(3, 9, offset, offset), feuille, wb);
         RegionUtil.setBorderLeft(HSSFCellStyle.BORDER_THIN, new CellRangeAddress(3, 9, offset, offset), feuille, wb);
         
-        listeRow.get(3).createCell(offset).setCellValue("Moyenne de l'annï¿½e");
+        listeRow.get(3).createCell(offset).setCellValue("Moyenne de l'année");
         listeRow.get(3).getCell(offset).setCellStyle(style);
       
         int p;
@@ -1805,7 +1817,8 @@ public class BulletinNote {
         } catch (IOException e) {
             e.printStackTrace();
         }
-            javax.swing.JOptionPane.showMessageDialog(null, "Bulletin gï¿½nï¿½ral gï¿½nï¿½rï¿½ !");
+     // TODO JAVAFX
+        //javax.swing.JOptionPane.showMessageDialog(null, "Bulletin gï¿½nï¿½ral gï¿½nï¿½rï¿½ !");
         }
     }
 
@@ -1819,9 +1832,9 @@ public class BulletinNote {
         boolean flag_valid;
 
         //
-        String cheminFichierSortie= new Extracteur("..\\ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Sorties");
-        String cheminFichierGeneral = new Extracteur("..\\ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Resources");
-        String cheminFichierParam = new Extracteur("..\\ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Parametrages");
+        String cheminFichierSortie= new Extracteur("ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Sorties");
+        String cheminFichierGeneral = new Extracteur("ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Resources");
+        String cheminFichierParam = new Extracteur("ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Parametrages");
         //
         File fichierGeneral = new File(cheminFichierGeneral + "\\" + NomFichierPromo + Promo + ".csv");
         File fichierParam = new File(cheminFichierParam+"\\Parametrage-" + NomFichierPromo + Promo + ".xml");
@@ -1831,11 +1844,14 @@ public class BulletinNote {
         df.setMaximumFractionDigits(2);
 
         if( !fichierGeneral.exists() ) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Fichier " + NomFichierPromo + Promo+".csv introuvable" );
+        	// TODO JAVAFX
+        	//javax.swing.JOptionPane.showMessageDialog(null, "Fichier " + NomFichierPromo + Promo+".csv introuvable" );
         } else if ( !fichierParam.exists() ) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Fichier " + NomFichierPromo + Promo+".xml introuvable" );
+        	// TODO JAVAFX
+        	//javax.swing.JOptionPane.showMessageDialog(null, "Fichier " + NomFichierPromo + Promo+".xml introuvable" );
         } else {
-            javax.swing.JOptionPane.showMessageDialog(null, "Gï¿½nï¿½ration du bilan de compensation en cours");
+        	// TODO JAVAFX
+        	//javax.swing.JOptionPane.showMessageDialog(null, "Gï¿½nï¿½ration du bilan de compensation en cours");
 
             ParamGeneral extractParam = new Extracteur(cheminFichierParam+"\\Parametrage-" + NomFichierPromo + Promo + ".xml").ExtracteurParametresGeneraux();
             Extracteur extractEleve = new Extracteur(cheminFichierGeneral+"\\" + NomFichierPromo + Promo + ".csv");
@@ -1982,7 +1998,8 @@ public class BulletinNote {
                 e.printStackTrace();
             }
 
-            javax.swing.JOptionPane.showMessageDialog(null, "Bilan de compensation gï¿½nï¿½rï¿½ !");
+         // TODO JAVAFX
+            //javax.swing.JOptionPane.showMessageDialog(null, "Bilan de compensation gï¿½nï¿½rï¿½ !");
         }
     }
 
@@ -1993,9 +2010,9 @@ public class BulletinNote {
     public void recapSur3ans(String NomFichierPromo) throws ParseException{
 
         //
-        String cheminFichierSortie= new Extracteur("..\\ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Sorties");
-        String cheminFichierGeneral = new Extracteur("..\\ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Resources");
-        String cheminFichierParam = new Extracteur("..\\ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Parametrages");
+        String cheminFichierSortie= new Extracteur("ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Sorties");
+        String cheminFichierGeneral = new Extracteur("ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Resources");
+        String cheminFichierParam = new Extracteur("ressources\\ParametrageAccesFichier.xml").ExtracteurCheminFichierDistant("Parametrages");
 
         File fichierGeneral1 = new File(cheminFichierGeneral+"\\"+NomFichierPromo+"ING1.csv");
         File fichierGeneral2 = new File(cheminFichierGeneral+"\\"+NomFichierPromo+"ING2.csv");
@@ -2003,7 +2020,7 @@ public class BulletinNote {
         File fichierParam1 = new File(cheminFichierParam+"\\Parametrage-"+NomFichierPromo + "ING1.xml");
         File fichierParam2 = new File(cheminFichierParam+"\\Parametrage-"+NomFichierPromo + "ING2.xml");
         File fichierParam3 = new File(cheminFichierParam+"\\Parametrage-"+NomFichierPromo + "ING3.xml");
-        //File fichierIndiv = new File("..\\ressources\\projet.xls");
+        //File fichierIndiv = new File("ressources\\projet.xls");
         int i,cptEleve,offset, cptUE,cptMat,cptFeuil1,nbMaxMatING1,nbMaxMatING2,nbMaxMatING3;
         float somme_moy_ING1,somme_moy_ING2,somme_moy_ING3;
         float coeffMat;
@@ -2011,21 +2028,28 @@ public class BulletinNote {
         i=0;
         
         if( !fichierGeneral1.exists() ) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Fichier " +NomFichierPromo+"ING1.csv introuvable" );
+        	// TODO JAVAFX
+        	//javax.swing.JOptionPane.showMessageDialog(null, "Fichier " +NomFichierPromo+"ING1.csv introuvable" );
         } else if ( !fichierGeneral2.exists() ) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Fichier " +NomFichierPromo+"ING2.csv introuvable" );
+        	// TODO JAVAFX
+        	//javax.swing.JOptionPane.showMessageDialog(null, "Fichier " +NomFichierPromo+"ING2.csv introuvable" );
         } else if ( !fichierGeneral3.exists() ) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Fichier " +NomFichierPromo+"ING3.csv introuvable" );
+        	// TODO JAVAFX
+        	//javax.swing.JOptionPane.showMessageDialog(null, "Fichier " +NomFichierPromo+"ING3.csv introuvable" );
         } else if ( !fichierParam3.exists() ) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Fichier Parametrage-"+NomFichierPromo + "ING3.xml introuvable" );
+        	// TODO JAVAFX
+        	//javax.swing.JOptionPane.showMessageDialog(null, "Fichier Parametrage-"+NomFichierPromo + "ING3.xml introuvable" );
         } else if ( !fichierParam2.exists() ) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Fichier Parametrage-"+NomFichierPromo + "ING2.xml introuvable" );
+        	// TODO JAVAFX
+        	//javax.swing.JOptionPane.showMessageDialog(null, "Fichier Parametrage-"+NomFichierPromo + "ING2.xml introuvable" );
         } else if ( !fichierParam1.exists() ) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Fichier Parametrage-"+NomFichierPromo + "ING1.xml introuvable" );
+        	// TODO JAVAFX
+        	//javax.swing.JOptionPane.showMessageDialog(null, "Fichier Parametrage-"+NomFichierPromo + "ING1.xml introuvable" );
         } /*else if ( !fichierIndiv.exists() ) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Fichier " + "..\\ressources\\projet.xls introuvable" );
+            javax.swing.JOptionPane.showMessageDialog(null, "Fichier " + "ressources\\projet.xls introuvable" );
         }*/ else {
-            javax.swing.JOptionPane.showMessageDialog(null, "Gï¿½nï¿½ration du rï¿½capitulatif sur 3 ans en cours");
+        	// TODO JAVAFX
+        	//javax.swing.JOptionPane.showMessageDialog(null, "Gï¿½nï¿½ration du rï¿½capitulatif sur 3 ans en cours");
             //
             
             
@@ -2037,17 +2061,17 @@ public class BulletinNote {
             Extracteur ExtractionING1 = new Extracteur(cheminFichierGeneral+"\\" + NomFichierPromo + "ING1.csv");
             ArrayList<Eleve> eleves_ING1 = ExtractionING1.ExtracteurEleves(NomFichierPromo + "ING1");
             eleves_ING1 = ExtractionING1.ExtracteurNotesToutesAnnee(eleves_ING1);
-            //ExtractionING1.setCheminFichier("..\\ressources\\projet.xls");
+            //ExtractionING1.setCheminFichier("ressources\\projet.xls");
 
             Extracteur ExtractionING2 = new Extracteur(cheminFichierGeneral+"\\" + NomFichierPromo + "ING2.csv");
             ArrayList<Eleve> eleves_ING2 = ExtractionING2.ExtracteurEleves(NomFichierPromo + "ING2");
             eleves_ING2 = ExtractionING2.ExtracteurNotesToutesAnnee(eleves_ING2);
-            //ExtractionING2.setCheminFichier("..\\ressources\\projet.xls");
+            //ExtractionING2.setCheminFichier("ressources\\projet.xls");
             
             Extracteur ExtractionING3 = new Extracteur(cheminFichierGeneral+"\\" + NomFichierPromo + "ING3.csv");
             ArrayList<Eleve> eleves_ING3 = ExtractionING3.ExtracteurEleves(NomFichierPromo + "ING3");
             eleves_ING3 = ExtractionING3.ExtracteurNotesToutesAnnee(eleves_ING3);
-            //ExtractionING3.setCheminFichier("..\\ressources\\projet.xls");
+            //ExtractionING3.setCheminFichier("ressources\\projet.xls");
             
             //
             DecimalFormat df = new DecimalFormat();
@@ -2077,7 +2101,7 @@ public class BulletinNote {
         
         
         //2. Crï¿½er une Feuille de calcul vide
-        Sheet feuille = wb.createSheet("Synthï¿½se sur 3 ans");
+        Sheet feuille = wb.createSheet("Synthèse sur 3 ans");
         ArrayList<Row> listeRow = new ArrayList<Row>();
         
         // Crï¿½ation du nombre de lignes nï¿½cessaire pour la suite
@@ -2087,7 +2111,7 @@ public class BulletinNote {
         }
         
         
-        listeRow.get(0).createCell(0).setCellValue("Synthï¿½se sur 3 ans");
+        listeRow.get(0).createCell(0).setCellValue("Synthèse sur 3 ans");
         feuille.addMergedRegion(new CellRangeAddress(
                 0, // mention first row here
                 0, //mention last row here, it is 1 as we are doing a column wise merging
@@ -2106,7 +2130,7 @@ public class BulletinNote {
             
             if(i==1){
             
-                    listeRow.get(2).createCell(offset).setCellValue("1ï¿½re annï¿½e");
+                    listeRow.get(2).createCell(offset).setCellValue("1ère année");
                     feuille.addMergedRegion(new CellRangeAddress(
                             2, // mention first row here
                             2, //mention last row here, it is 1 as we are doing a column wise merging
@@ -2119,7 +2143,7 @@ public class BulletinNote {
                     RegionUtil.setBorderRight(HSSFCellStyle.BORDER_THIN, new CellRangeAddress(2,2,offset,offset + eleves_ING1.get(0).getAnnee().getING1().size() + 1), feuille, wb);
                     RegionUtil.setBorderLeft(HSSFCellStyle.BORDER_THIN, new CellRangeAddress(2,2,offset,offset + eleves_ING1.get(0).getAnnee().getING1().size() + 1), feuille, wb);
                     
-                    listeRow.get(4).createCell(1).setCellValue("crï¿½dit");
+                    listeRow.get(4).createCell(1).setCellValue("crédit");
                     listeRow.get(4).getCell(1).setCellStyle(style);
                     
                     for (cptUE=0;cptUE<=eleves_ING1.get(0).getAnnee().getING1().size()-1;cptUE++){
@@ -2128,9 +2152,9 @@ public class BulletinNote {
                         listeRow.get(4).createCell(offset+cptUE).setCellValue(eleves_ING1.get(0).getAnnee().getING1().get(cptUE).getParamUE().getECTSUE());
                         listeRow.get(4).getCell(offset+cptUE).setCellStyle(style);
                     }
-                    listeRow.get(3).createCell(offset+eleves_ING1.get(0).getAnnee().getING1().size()).setCellValue("Moyenne de l'annï¿½e");
+                    listeRow.get(3).createCell(offset+eleves_ING1.get(0).getAnnee().getING1().size()).setCellValue("Moyenne de l'année");
                     listeRow.get(3).getCell(offset+eleves_ING1.get(0).getAnnee().getING1().size()).setCellStyle(style);
-                    listeRow.get(3).createCell(offset+eleves_ING1.get(0).getAnnee().getING1().size()+1).setCellValue("Nombre d'ETCS validï¿½");
+                    listeRow.get(3).createCell(offset+eleves_ING1.get(0).getAnnee().getING1().size()+1).setCellValue("Nombre d'ETCS validé");
                     listeRow.get(3).getCell(offset+eleves_ING1.get(0).getAnnee().getING1().size()+1).setCellStyle(style);
                     
                         
@@ -2138,7 +2162,7 @@ public class BulletinNote {
                     
             }else if(i==2){
                 
-                listeRow.get(2).createCell(offset).setCellValue("2ï¿½me annï¿½e");
+                listeRow.get(2).createCell(offset).setCellValue("2ème année");
                 feuille.addMergedRegion(new CellRangeAddress(
                         2, // mention first row here
                         2, //mention last row here, it is 1 as we are doing a column wise merging
@@ -2157,16 +2181,16 @@ public class BulletinNote {
                     listeRow.get(4).createCell(offset+cptUE).setCellValue(eleves_ING2.get(0).getAnnee().getING2().get(cptUE).getParamUE().getECTSUE());
                     listeRow.get(4).getCell(offset+cptUE).setCellStyle(style);
                 }
-                listeRow.get(3).createCell(offset+eleves_ING2.get(0).getAnnee().getING2().size()).setCellValue("Moyenne de l'annï¿½e");
+                listeRow.get(3).createCell(offset+eleves_ING2.get(0).getAnnee().getING2().size()).setCellValue("Moyenne de l'année");
                 listeRow.get(3).getCell(offset+eleves_ING2.get(0).getAnnee().getING2().size()).setCellStyle(style);
-                listeRow.get(3).createCell(offset+eleves_ING2.get(0).getAnnee().getING2().size()+1).setCellValue("Nombre d'ETCS validï¿½");
+                listeRow.get(3).createCell(offset+eleves_ING2.get(0).getAnnee().getING2().size()+1).setCellValue("Nombre d'ETCS validé");
                 listeRow.get(3).getCell(offset+eleves_ING2.get(0).getAnnee().getING2().size()+1).setCellStyle(style);
                 
                 offset = offset + eleves_ING2.get(0).getAnnee().getING2().size() + 2;
                 
             }else{
                 
-                listeRow.get(2).createCell(offset).setCellValue("3ï¿½me annï¿½e");
+                listeRow.get(2).createCell(offset).setCellValue("3ème année");
                 feuille.addMergedRegion(new CellRangeAddress(
                         2, // mention first row here
                         2, //mention last row here, it is 1 as we are doing a column wise merging
@@ -2185,9 +2209,9 @@ public class BulletinNote {
                     listeRow.get(4).createCell(offset+cptUE).setCellValue(eleves_ING3.get(0).getAnnee().getING3().get(cptUE).getParamUE().getECTSUE());
                     listeRow.get(4).getCell(offset+cptUE).setCellStyle(style);
                 }
-                listeRow.get(3).createCell(offset+eleves_ING3.get(0).getAnnee().getING3().size()).setCellValue("Moyenne de l'annï¿½e");
+                listeRow.get(3).createCell(offset+eleves_ING3.get(0).getAnnee().getING3().size()).setCellValue("Moyenne de l'année");
                 listeRow.get(3).getCell(offset+eleves_ING3.get(0).getAnnee().getING3().size()).setCellStyle(style);
-                listeRow.get(3).createCell(offset+eleves_ING3.get(0).getAnnee().getING3().size()+1).setCellValue("Nombre d'ETCS validï¿½");
+                listeRow.get(3).createCell(offset+eleves_ING3.get(0).getAnnee().getING3().size()+1).setCellValue("Nombre d'ETCS validé");
                 listeRow.get(3).getCell(offset+eleves_ING3.get(0).getAnnee().getING3().size()+1).setCellStyle(style);
                 
                 offset = offset + eleves_ING3.get(0).getAnnee().getING3().size() + 2;
@@ -2366,7 +2390,7 @@ public class BulletinNote {
         }
         
         //moyenne gï¿½nï¿½ral des trois ans
-        listeRow.get(2).createCell(offset+eleves_ING3.get(0).getAnnee().getING3().size()+2).setCellValue("Moyenne de l'Ã©lÃ¨ve");
+        listeRow.get(2).createCell(offset+eleves_ING3.get(0).getAnnee().getING3().size()+2).setCellValue("Moyenne de l'élève");
         feuille.addMergedRegion(new CellRangeAddress(
                 2, // mention first row here
                 4, //mention last row here, it is 1 as we are doing a column wise merging
@@ -2401,7 +2425,8 @@ public class BulletinNote {
         } catch (IOException e) {
             e.printStackTrace();
         }
-            javax.swing.JOptionPane.showMessageDialog(null, "Rï¿½capitulatif sur 3 ans gï¿½nï¿½rï¿½ !");
+     // TODO JAVAFX
+    	//javax.swing.JOptionPane.showMessageDialog(null, "Rï¿½capitulatif sur 3 ans gï¿½nï¿½rï¿½ !");
         }
 
         
