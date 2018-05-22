@@ -5,18 +5,20 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<TabPane fx:id="tp_principal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ecf0f1;" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+<TabPane fx:id="tp_principal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ecf0f1;" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
     <tabs>
         <Tab fx:id="t_accueil" text="Accueil">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <children>
-                        <JFXButton fx:id="jfxb_bilanCompensation" buttonType="RAISED" layoutX="216.0" layoutY="70.0" onAction="#handleHomeBilanCompensationAction" prefHeight="41.0" prefWidth="153.0" style="-fx-background-color: #3498db;" text="Bilan de compensation">
+                        <JFXButton fx:id="jfxb_bilanCompensation" buttonType="RAISED" layoutX="216.0" layoutY="203.0" onAction="#handleHomeBilanCompensationAction" prefHeight="41.0" prefWidth="153.0" style="-fx-background-color: #3498db;" text="Bilan de compensation">
                             <ripplerFill>
                                 <LinearGradient endX="1.0" endY="1.0">
                                     <stops>
@@ -32,7 +34,7 @@
                                 <Font size="18.0" />
                             </font>
                         </Label>
-                        <JFXButton fx:id="jfxb_bulletinIndividuel" buttonType="RAISED" layoutX="215.0" layoutY="135.0" onAction="#handleHomeBulletinIndividuelAction" prefHeight="41.0" prefWidth="153.0" style="-fx-background-color: #3498db;" text="Bilan individuel">
+                        <JFXButton fx:id="jfxb_bulletinIndividuel" buttonType="RAISED" layoutX="215.0" layoutY="70.0" onAction="#handleHomeBulletinIndividuelAction" prefHeight="41.0" prefWidth="153.0" style="-fx-background-color: #3498db;" text="Bilan individuel">
                             <ripplerFill>
                                 <LinearGradient endX="1.0" endY="1.0">
                                     <stops>
@@ -43,7 +45,7 @@
                                 </LinearGradient>
                             </ripplerFill>
                         </JFXButton>
-                        <JFXButton fx:id="jfxb_recapTroisAn" buttonType="RAISED" layoutX="215.0" layoutY="203.0" onAction="#handleHomeRecapTroisAnsAction" prefHeight="41.0" prefWidth="151.0" style="-fx-background-color: #3498db;" text="Récapitulatif sur 3 ans">
+                        <JFXButton fx:id="jfxb_recapTroisAn" buttonType="RAISED" layoutX="215.0" layoutY="274.0" onAction="#handleHomeRecapTroisAnsAction" prefHeight="41.0" prefWidth="151.0" style="-fx-background-color: #3498db;" text="Récapitulatif sur 3 ans">
                             <ripplerFill>
                                 <LinearGradient endX="1.0" endY="1.0">
                                     <stops>
@@ -54,7 +56,7 @@
                                 </LinearGradient>
                             </ripplerFill>
                         </JFXButton>
-                        <JFXButton fx:id="jfxb_bulletinGeneral" buttonType="RAISED" layoutX="216.0" layoutY="274.0" onAction="#handleHomeBulletinGeneralAction" prefHeight="41.0" prefWidth="153.0" style="-fx-background-color: #3498db;" text="Bulletin général">
+                        <JFXButton fx:id="jfxb_bulletinGeneral" buttonType="RAISED" layoutX="216.0" layoutY="135.0" onAction="#handleHomeBulletinGeneralAction" prefHeight="41.0" prefWidth="153.0" style="-fx-background-color: #3498db;" text="Bulletin général">
                             <ripplerFill>
                                 <LinearGradient endX="1.0" endY="1.0">
                                     <stops>
@@ -65,52 +67,11 @@
                                 </LinearGradient>
                             </ripplerFill>
                         </JFXButton>
-                    </children>
-                </AnchorPane>
-            </content>
-        </Tab>
-        <Tab fx:id="t_bilanCompensation" text="Bilan de compensation">
-            <content>
-                <AnchorPane fx:id="bilanCompensationBianCompensationTab" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ecf0f1;">
-                    <children>
-                        <Label layoutX="208.0" layoutY="14.0" text="Bilan de compensation">
-                            <font>
-                                <Font size="18.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="177.0" layoutY="93.0" text="Promotion">
-                            <font>
-                                <Font size="14.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="177.0" layoutY="146.0" text="Année">
-                            <font>
-                                <Font size="14.0" />
-                            </font>
-                        </Label>
-                        <JFXComboBox layoutX="272.0" layoutY="91.0" prefHeight="26.0" prefWidth="132.0" />
-                        <JFXComboBox layoutX="272.0" layoutY="143.0" prefHeight="26.0" prefWidth="132.0" />
-                        <JFXButton buttonType="RAISED" layoutX="272.0" layoutY="232.0" prefHeight="39.0" prefWidth="89.0" style="-fx-background-color: #3498db;" text="Edition">
-                            <ripplerFill>
-                        <LinearGradient endX="1.0" endY="1.0">
-                           <stops>
-                              <Stop color="WHITE" />
-                              <Stop color="#74a0b9" offset="1.0" />
-                           </stops>
-                        </LinearGradient>
-                            </ripplerFill>
-                        </JFXButton>
-                  <JFXButton fx:id="jfxb_HomeFromBilanCompensation" buttonType="RAISED" layoutX="14.0" layoutY="12.0" onAction="#handleReturnHomeAction" style="-fx-background-color: #3498db #3498db;" text="Accueil">
-                     <ripplerFill>
-                        <LinearGradient endX="1.0" endY="1.0">
-                           <stops>
-                              <Stop color="WHITE" />
-                              <Stop color="WHITE" offset="0.007434944237918215" />
-                              <Stop color="#74a0b9" offset="1.0" />
-                           </stops>
-                        </LinearGradient>
-                     </ripplerFill>
-                  </JFXButton>
+                  <ImageView fitHeight="27.0" fitWidth="125.0" layoutX="461.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../ressources/3il_logos_ingenieurs.png" />
+                     </image>
+                  </ImageView>
                     </children>
                 </AnchorPane>
             </content>
@@ -140,7 +101,7 @@
                             </font>
                         </Label>
                         <JFXComboBox fx:id="jfxCB_PromotionInd" layoutX="300.0" layoutY="80.0" onAction="#promoIsFilledOnBulletinIndiv" prefHeight="26.0" prefWidth="125.0" />
-                        <JFXComboBox fx:id="jfxCB_AnneeInd" layoutX="300.0" layoutY="129.0" onAction="#yearAndPromoAreFilled" prefHeight="26.0" prefWidth="125.0" />
+                        <JFXComboBox fx:id="jfxCB_AnneeInd" layoutX="300.0" layoutY="129.0" onAction="#yearAndPromoAreFilledOnBulletinIndiv" prefHeight="26.0" prefWidth="125.0" />
                         <JFXComboBox fx:id="jfxCB_EleveInd" layoutX="300.0" layoutY="182.0" prefHeight="26.0" prefWidth="125.0" />
                         <JFXButton fx:id="jfxb_EditionBilanIndividuel" buttonType="RAISED" layoutX="255.0" layoutY="249.0" onAction="#handleEditionButtonBulletinIndividuel" prefHeight="39.0" prefWidth="89.0" style="-fx-background-color: #3498db;" text="Edition">
                             <ripplerFill>
@@ -163,15 +124,113 @@
                         </LinearGradient>
                      </ripplerFill>
                   </JFXButton>
+                  <ImageView fitHeight="27.0" fitWidth="125.0" layoutX="461.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../ressources/3il_logos_ingenieurs.png" />
+                     </image>
+                  </ImageView>
                     </children>
                 </AnchorPane>
             </content>
         </Tab>
-        <Tab fx:id="t_recapTroisAn" text="R�cap 3 ans">
+        <Tab fx:id="t_bulletinGeneral" text="Bulletin général">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ecf0f1;">
                     <children>
-                        <Label layoutX="213.0" layoutY="14.0" text="R�capitulatif sur 3 ans">
+                        <Label layoutX="238.0" layoutY="14.0" text="Bulletin général">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                        <JFXButton fx:id="jfxb_EditionBulletinGeneral" buttonType="RAISED" layoutX="255.0" layoutY="266.0" onAction="#handleEditionButtonBulletinGeneral" prefHeight="39.0" prefWidth="89.0" style="-fx-background-color: #3498db;" text="Edition" />
+                        <Label layoutX="210.0" layoutY="84.0" text="Promotion">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="210.0" layoutY="140.0" text="Année">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <JFXComboBox fx:id="jfxCB_PromotionGen" layoutX="300.0" layoutY="82.0" onAction="#promoIsFilledOnBulletinGeneral" prefHeight="26.0" prefWidth="145.0" />
+                        <JFXComboBox fx:id="jfxCB_AnneeGen" layoutX="300.0" layoutY="137.0" onAction="#anneeIsFilledOnBulletinGeneral" prefHeight="26.0" prefWidth="145.0" />
+                  <JFXButton fx:id="jfxb_HomeFromBulletinGeneral" buttonType="RAISED" layoutX="14.0" layoutY="12.0" onAction="#handleReturnHomeAction" style="-fx-background-color: #3498db #3498db;" text="Accueil">
+                     <ripplerFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop color="WHITE" />
+                              <Stop color="WHITE" offset="0.007434944237918215" />
+                              <Stop color="#74a0b9" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </ripplerFill>
+                  </JFXButton>
+                  <ImageView fitHeight="27.0" fitWidth="125.0" layoutX="461.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../ressources/3il_logos_ingenieurs.png" />
+                     </image>
+                  </ImageView>
+                    </children>
+                </AnchorPane>
+            </content>
+        </Tab>
+        <Tab fx:id="t_bilanCompensation" text="Bilan de compensation">
+            <content>
+                <AnchorPane fx:id="bilanCompensationBianCompensationTab" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ecf0f1;">
+                    <children>
+                        <Label layoutX="208.0" layoutY="14.0" text="Bilan de compensation">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="177.0" layoutY="93.0" text="Promotion">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="177.0" layoutY="146.0" text="Année">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <JFXComboBox fx:id="jfxCB_PromotionComp" layoutX="272.0" layoutY="91.0" onAction="#promoIsFilledOnBilanCompensation" prefHeight="26.0" prefWidth="132.0" />
+                        <JFXComboBox fx:id="jfxCB_AnneeComp" layoutX="272.0" layoutY="143.0" onAction="#anneeIsFilledOnBilanCompensation" prefHeight="26.0" prefWidth="132.0" />
+                        <JFXButton fx:id="jfxb_EditionBilanCompensation" buttonType="RAISED" layoutX="272.0" layoutY="232.0" onAction="#handleEditionButtonBilanCompensation" prefHeight="39.0" prefWidth="89.0" style="-fx-background-color: #3498db;" text="Edition">
+                            <ripplerFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop color="WHITE" />
+                              <Stop color="#74a0b9" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                            </ripplerFill>
+                        </JFXButton>
+                  <JFXButton fx:id="jfxb_HomeFromBilanCompensation" buttonType="RAISED" layoutX="14.0" layoutY="12.0" onAction="#handleReturnHomeAction" style="-fx-background-color: #3498db #3498db;" text="Accueil">
+                     <ripplerFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop color="WHITE" />
+                              <Stop color="WHITE" offset="0.007434944237918215" />
+                              <Stop color="#74a0b9" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </ripplerFill>
+                  </JFXButton>
+                  <ImageView fitHeight="27.0" fitWidth="125.0" layoutX="461.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../ressources/3il_logos_ingenieurs.png" />
+                     </image>
+                  </ImageView>
+                    </children>
+                </AnchorPane>
+            </content>
+        </Tab>
+        <Tab fx:id="t_recapTroisAn" text="Récap 3 ans">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ecf0f1;">
+                    <children>
+                        <Label layoutX="213.0" layoutY="14.0" text="Récapitulatif sur 3 ans">
                             <font>
                                 <Font size="18.0" />
                             </font>
@@ -204,43 +263,11 @@
                         </LinearGradient>
                      </ripplerFill>
                   </JFXButton>
-                    </children>
-                </AnchorPane>
-            </content>
-        </Tab>
-        <Tab fx:id="t_bulletinGeneral" text="Bulletin g�n�ral">
-            <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ecf0f1;">
-                    <children>
-                        <Label layoutX="238.0" layoutY="14.0" text="Bulletin g�n�ral">
-                            <font>
-                                <Font size="18.0" />
-                            </font>
-                        </Label>
-                        <JFXButton fx:id="jfxb_EditionBulletinGeneral" buttonType="RAISED" layoutX="255.0" layoutY="266.0" prefHeight="39.0" prefWidth="89.0" style="-fx-background-color: #3498db;" text="Edition" />
-                        <Label layoutX="210.0" layoutY="84.0" text="Promotion">
-                            <font>
-                                <Font size="14.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="210.0" layoutY="140.0" text="Année">
-                            <font>
-                                <Font size="14.0" />
-                            </font>
-                        </Label>
-                        <JFXComboBox fx:id="jfxCB_PromotionGen" layoutX="300.0" layoutY="82.0" prefHeight="26.0" prefWidth="145.0" />
-                        <JFXComboBox fx:id="jfxCB_AnneeGen" layoutX="300.0" layoutY="137.0" prefHeight="26.0" prefWidth="145.0" />
-                  <JFXButton fx:id="jfxb_HomeFromBulletinGeneral" buttonType="RAISED" layoutX="14.0" layoutY="12.0" onAction="#handleReturnHomeAction" style="-fx-background-color: #3498db #3498db;" text="Accueil">
-                     <ripplerFill>
-                        <LinearGradient endX="1.0" endY="1.0">
-                           <stops>
-                              <Stop color="WHITE" />
-                              <Stop color="WHITE" offset="0.007434944237918215" />
-                              <Stop color="#74a0b9" offset="1.0" />
-                           </stops>
-                        </LinearGradient>
-                     </ripplerFill>
-                  </JFXButton>
+                  <ImageView fitHeight="27.0" fitWidth="125.0" layoutX="461.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../ressources/3il_logos_ingenieurs.png" />
+                     </image>
+                  </ImageView>
                     </children>
                 </AnchorPane>
             </content>

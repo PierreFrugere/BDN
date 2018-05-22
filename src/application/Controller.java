@@ -70,6 +70,9 @@ public class Controller {
     @FXML //  fx:id="jfxb_EditionBulletinGeneral"
     private JFXButton jfxb_EditionBulletinGeneral; // "Bulletin Général Edition Button
     
+    @FXML //  fx:id="jfxb_EditionBilanCompensation"
+    private JFXButton jfxb_EditionBilanCompensation; // "Bulletin Général Edition Button
+    
     
     /*
      * Combo Box
@@ -89,6 +92,12 @@ public class Controller {
     
     @FXML // fx:id="jfxCB_AnneeGen"
     private JFXComboBox<String> jfxCB_AnneeGen;			// Annee Combo box Bulletin General
+    
+    @FXML // fx:id="jfxCB_PromotionComp"
+    private JFXComboBox<String> jfxCB_PromotionComp;	// Promotion Combo box Bilan de compensation
+    
+    @FXML // fx:id="jfxCB_AnneeComp"
+    private JFXComboBox<String> jfxCB_AnneeComp;		// Annee Combo box Bilan de compensation
     
     /*
      * Tabs
@@ -126,10 +135,16 @@ public class Controller {
 		
 		// Initialize Bilan individuel tab
 		this.initialiseBilanIndividuelTab();
+		
+		// Initialise Bulletin General Tab
+		this.initialiseBulletinGeneralTab();
+		
+		// Initialise Bilan Compensation Tab
+		this.initialiseBilanCompensationTab();
 	}
 
 	/*
-	 * Button Actions
+	 * Home Buttons Action
 	 */
     @FXML
     private void handleHomeBilanCompensationAction(ActionEvent event) {   	
@@ -141,9 +156,6 @@ public class Controller {
     private void handleHomeBulletinIndividuelAction(ActionEvent event) {   	
     	// Switch to "Bulletin Individuel" Tab
     	this.selectionModel.select(t_bilanIndividuel);
-    	
-    	// Initialize the view content
-    	this.initialiseBilanIndividuelTab();
     }
     
     @FXML
@@ -163,6 +175,10 @@ public class Controller {
     	// Switch to "Accueil" Tab
     	this.selectionModel.select(t_accueil);
     }
+    
+    /*
+     * Edition Buttons Action
+     */
     
     @FXML
     private void handleEditionButtonBulletinIndividuel(ActionEvent event) {
@@ -190,14 +206,64 @@ public class Controller {
 			} catch (ParseException | IOException e) {
 				e.printStackTrace();
 			}
-    	}
-    	
-    	
-      	
+    	} 	
     }
     
     @FXML
-    private void yearAndPromoAreFilled(ActionEvent event) {
+    private void handleEditionButtonBulletinGeneral(ActionEvent event) {
+    	
+    	BulletinNote bulletin = new BulletinNote("", "", jfxCB_PromotionGen.getValue(), 11, 7, "01011970");
+		try {
+			bulletin.bulletinGeneral(jfxCB_AnneeGen.getValue(), jfxCB_PromotionGen.getValue());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+    }
+    
+    @FXML
+    private void handleEditionButtonBilanCompensation(ActionEvent event) {
+    	BulletinNote bulletin = new BulletinNote("", "", jfxCB_PromotionComp.getValue(), 11, 7, "01011970");
+		try {
+			bulletin.bilanCompensation(jfxCB_AnneeComp.getValue(), jfxCB_PromotionComp.getValue());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+    }
+    
+    
+    /*
+     * Behavior of UI changing depending on combo box value
+     * For the Bulletin Individuel Tab
+     */
+    
+    @FXML
+    private void promoIsFilledOnBulletinIndiv(ActionEvent event) {
+    	String promo = "";
+    	ArrayList<String> listAnneesSansDoublons = new ArrayList<String>();
+    	
+    	if (jfxCB_PromotionInd.getValue() != "") {
+    		promo = jfxCB_PromotionInd.getValue();
+    		
+    		listAnneesSansDoublons = this.retrieveAvailableAnneeByPromo(promo);
+        	
+        	// Adding content in combo box
+        	ObservableList<String> anneeComboBoxList = FXCollections.observableArrayList(listAnneesSansDoublons);
+        	jfxCB_AnneeInd.getItems().clear();
+        	jfxCB_AnneeInd.getItems().addAll(anneeComboBoxList);
+        	
+        	// Enabling comboBox
+        	jfxCB_AnneeInd.setDisable(false);
+        	
+    	} else {
+    		jfxCB_AnneeInd.setDisable(true);
+    		jfxCB_AnneeInd.getItems().clear();
+    		jfxCB_AnneeInd.setValue("");
+    		jfxb_EditionBilanIndividuel.setDisable(true);
+    	}
+    }
+    
+    @FXML
+    private void yearAndPromoAreFilledOnBulletinIndiv(ActionEvent event) {
     	// Retrieving year and promotion selected by user
     	String year = "";
     	String promo = "";
@@ -249,52 +315,157 @@ public class Controller {
     	}
     }
     
+  
+    /*
+     * Behavior of UI changing depending on combo box value
+     * For the Bulletin General Tab
+     */
+    
     @FXML
-    private void promoIsFilledOnBulletinIndiv(ActionEvent event) {
+    private void promoIsFilledOnBulletinGeneral(ActionEvent event) {
     	String promo = "";
     	ArrayList<String> listAnneesSansDoublons = new ArrayList<String>();
     	
-    	if (jfxCB_PromotionInd.getValue() != "") {
-    		promo = jfxCB_PromotionInd.getValue();
+    	if (jfxCB_PromotionGen.getValue() != "") {
+    		promo = jfxCB_PromotionGen.getValue();
     		
     		listAnneesSansDoublons = this.retrieveAvailableAnneeByPromo(promo);
         	
         	// Adding content in combo box
         	ObservableList<String> anneeComboBoxList = FXCollections.observableArrayList(listAnneesSansDoublons);
-        	jfxCB_AnneeInd.getItems().clear();
-        	jfxCB_AnneeInd.getItems().addAll(anneeComboBoxList);
+        	jfxCB_AnneeGen.getItems().clear();
+        	jfxCB_AnneeGen.getItems().addAll(anneeComboBoxList);
         	
         	// Enabling comboBox
-        	jfxCB_AnneeInd.setDisable(false);
+        	jfxCB_AnneeGen.setDisable(false);
         	
     	} else {
-    		jfxCB_AnneeInd.setDisable(true);
-    		jfxCB_AnneeInd.getItems().clear();
-    		jfxCB_AnneeInd.setValue("");
-    		jfxb_EditionBilanIndividuel.setDisable(true);
+    		jfxCB_AnneeGen.setDisable(true);
+    		jfxCB_AnneeGen.getItems().clear();
+    		jfxCB_AnneeGen.setValue("");
+    	}
+    	
+    }
+    
+    @FXML
+    private void anneeIsFilledOnBulletinGeneral(ActionEvent event) {
+    	
+    	// If the year is selected the edition is possible, otherwise it's not
+    	if (jfxCB_AnneeGen.getValue() != "") {
+    		jfxb_EditionBulletinGeneral.setDisable(false);
+    	} else {
+    		jfxb_EditionBulletinGeneral.setDisable(true);
     	}
     }
     
-    private void initialiseBilanIndividuelTab() {
-    	    	ArrayList<String> listPromosSansDoublons = new ArrayList<String>();
-    	    	
-    	    	listPromosSansDoublons = this.retrieveAvailablePromos();
-    	    	
-    	    	// Add List of YEAR and PROMOTION to respective Combo box
-    	    	ObservableList<String> promotionComboBoxList = FXCollections.observableArrayList(listPromosSansDoublons);
-    	    	jfxCB_PromotionInd.getItems().addAll(promotionComboBoxList);
-    	    	
-    	    	// Disabling Eleves combo box
-    	    	jfxCB_EleveInd.setDisable(true);
-    			jfxCB_EleveInd.setValue("");
-    			
-    			// Disabling Year combo box
-    			jfxCB_AnneeInd.setDisable(true);
-    			jfxCB_AnneeInd.setValue("");
-    			
-    			// Disabling Edition button
-    			jfxb_EditionBilanIndividuel.setDisable(true);
+    
+    /*
+     * Behavior of UI changing depending on combo box value
+     * For the Bilan Compensation Tab
+     */
+    
+    @FXML
+    private void promoIsFilledOnBilanCompensation(ActionEvent event) {
+    	String promo = "";
+    	ArrayList<String> listAnneesSansDoublons = new ArrayList<String>();
+    	
+    	if (jfxCB_PromotionComp.getValue() != "") {
+    		promo = jfxCB_PromotionComp.getValue();
+    		
+    		listAnneesSansDoublons = this.retrieveAvailableAnneeByPromo(promo);
+        	
+        	// Adding content in combo box
+        	ObservableList<String> anneeComboBoxList = FXCollections.observableArrayList(listAnneesSansDoublons);
+        	jfxCB_AnneeComp.getItems().clear();
+        	jfxCB_AnneeComp.getItems().addAll(anneeComboBoxList);
+        	
+        	// Enabling comboBox
+        	jfxCB_AnneeComp.setDisable(false);
+        	
+    	} else {
+    		jfxCB_AnneeComp.setDisable(true);
+    		jfxCB_AnneeComp.getItems().clear();
+    		jfxCB_AnneeComp.setValue("");
+    	}
+    	
     }
+    
+    @FXML
+    private void anneeIsFilledOnBilanCompensation(ActionEvent event) {
+    	
+    	// If the year is selected the edition is possible, otherwise it's not
+    	if (jfxCB_AnneeComp.getValue() != "") {
+    		jfxb_EditionBilanCompensation.setDisable(false);
+    	} else {
+    		jfxb_EditionBilanCompensation.setDisable(true);
+    	}
+    }
+    
+    
+    /*
+     * Initialise the behavior of the tabs
+     */
+    
+    private void initialiseBilanIndividuelTab() {
+    	ArrayList<String> listPromosSansDoublons = new ArrayList<String>();
+
+    	listPromosSansDoublons = this.retrieveAvailablePromos();
+
+    	// Add List of PROMOTION to respective Combo box
+    	ObservableList<String> promotionComboBoxList = FXCollections.observableArrayList(listPromosSansDoublons);
+    	jfxCB_PromotionInd.getItems().addAll(promotionComboBoxList);
+
+    	// Disabling Eleves combo box
+    	jfxCB_EleveInd.setDisable(true);
+    	jfxCB_EleveInd.setValue("");
+
+    	// Disabling Year combo box
+    	jfxCB_AnneeInd.setDisable(true);
+    	jfxCB_AnneeInd.setValue("");
+
+    	// Disabling Edition button
+    	jfxb_EditionBilanIndividuel.setDisable(true);
+    }
+    
+    private void initialiseBulletinGeneralTab() {
+    	ArrayList<String> listPromosSansDoublons = new ArrayList<String>();
+    	
+    	listPromosSansDoublons = this.retrieveAvailablePromos();
+    	
+    	// Add List of PROMOTION to respective Combo box
+    	ObservableList<String> promotionComboBoxList = FXCollections.observableArrayList(listPromosSansDoublons);
+    	jfxCB_PromotionGen.getItems().addAll(promotionComboBoxList);
+    	
+    	// Disabling Year Combo box
+    	jfxCB_AnneeGen.setDisable(true);
+    	jfxCB_AnneeGen.setValue("");
+    	
+    	// Disabling edition button
+    	jfxb_EditionBulletinGeneral.setDisable(true);
+    }
+    
+    private void initialiseBilanCompensationTab() {
+    	ArrayList<String> listPromosSansDoublons = new ArrayList<String>();
+    	
+    	listPromosSansDoublons = this.retrieveAvailablePromos();
+    	
+    	// Add List of PROMOTION to respective Combo box
+    	ObservableList<String> promotionComboBoxList = FXCollections.observableArrayList(listPromosSansDoublons);
+    	jfxCB_PromotionComp.getItems().addAll(promotionComboBoxList);
+    	
+    	// Disabling Year Combo box
+    	jfxCB_AnneeComp.setDisable(true);
+    	jfxCB_AnneeComp.setValue("");
+    	
+    	// Disabling edition button
+    	jfxb_EditionBilanCompensation.setDisable(true);
+    }
+    
+    
+    
+    /*
+     * Common used functions to retrieve data to fill combo boxes
+     */
     
     private String[] retrieveListOfFiles() {
     	

@@ -14,6 +14,7 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import parametre.ParamGeneral;
 
 import java.awt.*;
+import java.lang.Integer;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -29,7 +30,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-
 /**
  * Classe qui rassemble toutes les données et outils permettant de manipuler les bulletins de notes
  * @author WilliamHenry, BenjaminMazoyer & PierreFrugere
