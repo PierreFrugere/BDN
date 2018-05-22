@@ -157,10 +157,6 @@ public class Controller {
 		jfxCB_Annee.setValue("");
     	Collections.sort(listPromosSansDoublons);
     	
-    	for (String elm: listPromosSansDoublons) {
-    		System.out.println("Liste Promos: " + elm);
-    	}
-    	
     	// Extract Eleves
     	ArrayList<Eleve> listEleves = new ArrayList<Eleve>();
     	Extracteur extracteurEleve = new Extracteur(cheminFichier + "\\Promo11ING1.csv");
@@ -168,13 +164,8 @@ public class Controller {
     	try {
 			listEleves = extracteurEleve.ExtracteurEleves("Promo11ING1");
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
-    	for (Eleve elm: listEleves) {
-    		System.out.println("Eleve: " + elm.getPrenomEleve() + " " + elm.getNomEleve());
-    	}
 		
 	}
 
