@@ -8,3 +8,5 @@ BulletinDeNotes.iml
 /ressources/
 /sorties/
 /lib/
+*.exe
+launch4j.log
