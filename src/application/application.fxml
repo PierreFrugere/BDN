@@ -85,25 +85,25 @@
                                 <Font size="18.0" />
                             </font>
                         </Label>
-                        <Label layoutX="210.0" layoutY="82.0" text="Promotion">
+                        <Label layoutX="210.0" layoutY="80.0" text="Promotion">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <Label layoutX="207.0" layoutY="132.0" text="Année">
+                        <Label layoutX="210.0" layoutY="130.0" text="Année">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <Label layoutX="207.0" layoutY="185.0" text="Elève">
+                        <Label layoutX="210.0" layoutY="180.0" text="Elève">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </Label>
                         <JFXComboBox fx:id="jfxCB_PromotionInd" layoutX="300.0" layoutY="80.0" onAction="#promoIsFilledOnBulletinIndiv" prefHeight="26.0" prefWidth="125.0" />
-                        <JFXComboBox fx:id="jfxCB_AnneeInd" layoutX="300.0" layoutY="129.0" onAction="#yearAndPromoAreFilledOnBulletinIndiv" prefHeight="26.0" prefWidth="125.0" />
-                        <JFXComboBox fx:id="jfxCB_EleveInd" layoutX="300.0" layoutY="182.0" prefHeight="26.0" prefWidth="125.0" />
-                        <JFXButton fx:id="jfxb_EditionBilanIndividuel" buttonType="RAISED" layoutX="255.0" layoutY="249.0" onAction="#handleEditionButtonBulletinIndividuel" prefHeight="39.0" prefWidth="89.0" style="-fx-background-color: #3498db;" text="Edition">
+                        <JFXComboBox fx:id="jfxCB_AnneeInd" layoutX="300.0" layoutY="130.0" onAction="#yearAndPromoAreFilledOnBulletinIndiv" prefHeight="26.0" prefWidth="125.0" />
+                        <JFXComboBox fx:id="jfxCB_EleveInd" layoutX="300.0" layoutY="180.0" onAction="#eleveIsSelectedOnBulletinGeneral" prefHeight="26.0" prefWidth="125.0" />
+                        <JFXButton fx:id="jfxb_EditionBilanIndividuel" buttonType="RAISED" layoutX="255.0" layoutY="299.0" onAction="#handleEditionButtonBulletinIndividuel" prefHeight="39.0" prefWidth="89.0" style="-fx-background-color: #3498db;" text="Edition">
                             <ripplerFill>
                                 <LinearGradient endX="1.0" endY="1.0">
                                     <stops>
@@ -129,6 +129,12 @@
                         <Image url="@../../ressources/3il_logos_ingenieurs.png" />
                      </image>
                   </ImageView>
+                  <Label layoutX="210.0" layoutY="220.0" text="Format">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <JFXComboBox fx:id="jfxCB_FormatInd" layoutX="300.0" layoutY="220.0" prefHeight="26.0" prefWidth="125.0" />
                     </children>
                 </AnchorPane>
             </content>

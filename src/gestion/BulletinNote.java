@@ -6,16 +6,21 @@ package gestion;
 
 import metier.Eleve;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.RegionUtil;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFColor;
 import org.apache.poi.xssf.usermodel.XSSFFont;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+
 import parametre.ParamGeneral;
 
 import java.awt.*;
 import java.lang.Integer;
 import java.io.File;
+import java.io.FileInputStream;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -23,11 +28,20 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Iterator;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+
+import application.Controller;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 /**
@@ -38,6 +52,7 @@ import javafx.scene.control.Alert.AlertType;
 public class BulletinNote {
 
     private ParamGeneral param;
+    private String format;
 
     /**
      * Constructeur on donne les informations d'un Ã©lÃ¨ve et les informations de paramï¿½trage
@@ -48,7 +63,7 @@ public class BulletinNote {
      * @param min information de paramï¿½trage
      * @param date information de paramï¿½trage
      */
-    public BulletinNote(String nom, String prenom, String promo, float valid, float min, String date){
+    public BulletinNote(String nom, String prenom, String promo, float valid, float min, String date) {
         setParam(new ParamGeneral(valid,min,0));
     }
 
@@ -106,7 +121,7 @@ public class BulletinNote {
             //
             DecimalFormat df = new DecimalFormat();
             df.setMaximumFractionDigits(2);
-
+            
             //1. Crï¿½er un Document vide
             XSSFWorkbook wb = new XSSFWorkbook();
             //
@@ -524,7 +539,7 @@ public class BulletinNote {
         	alert.setTitle("Information");
         	alert.setHeaderText("Information");
         	alert.setContentText("Bulletins individuels générés");
-        	alert.showAndWait();
+        	alert.show();
             
         }
     }
@@ -578,7 +593,6 @@ public class BulletinNote {
             ArrayList<Eleve> eleves_extrait = Extraction.ExtracteurEleves(NomFichierPromo + Promo);
             eleves_extrait = Extraction.ExtracteurNotesToutesAnnee(eleves_extrait);
             Extraction.setCheminFichier(cheminFichierGeneral+"\\Individuels"+NomFichierPromo+Promo+".xls");
-            alert.showAndWait();
 
             DecimalFormat df = new DecimalFormat();
             df.setMaximumFractionDigits(2);
@@ -1017,12 +1031,64 @@ public class BulletinNote {
                     e.printStackTrace();
                 }
                 
+                // TODO Handle Format type to do PDF or EXCEL
+                if (this.format == Controller.FORMAT_PDF) {
+                	
+                	// Destination file
+                	final String DEST = cheminFichierSortie+"\\bulletin" + eleves_extrait.get(indexEleve).getNomEleve() + eleves_extrait.get(indexEleve).getPromoEleve() + ".pdf";
+                	
+                	// Convert file into pdf
+                	FileInputStream inputExcel = new FileInputStream(new File(cheminFichierSortie+"\\bulletinsIndividuel" + NomFichierPromo + Promo + ".xlsx"));
+                	XSSFWorkbook excelWorkbook = new XSSFWorkbook(inputExcel); 
+                	XSSFSheet excelWorksheet = excelWorkbook.getSheetAt(0);
+                	Iterator<Row> rowIterator = excelWorksheet.iterator();
+                	
+                	PdfDocument pdfDoc = new PdfDocument(new PdfWriter(DEST));
+                	Document bulletinPdf = new Document(pdfDoc);
+                	Table table = new Table(9);
+                	Cell tableCell;
+                	
+                	while (rowIterator.hasNext()) {
+                		Row row = rowIterator.next();
+                		Iterator<org.apache.poi.ss.usermodel.Cell> cellIterator = row.cellIterator();
+                		while (cellIterator.hasNext()) {
+                			org.apache.poi.ss.usermodel.Cell cell = cellIterator.next();
+                			switch (cell.getCellType()) {
+							case org.apache.poi.ss.usermodel.Cell.CELL_TYPE_STRING:
+								tableCell = new Cell();
+	                			tableCell.add(new Paragraph(cell.getStringCellValue()));
+	                			table.addCell(tableCell);
+								break;
+							case org.apache.poi.ss.usermodel.Cell.CELL_TYPE_NUMERIC:
+								tableCell = new Cell();
+								double cellNumericValue = cell.getNumericCellValue();
+	                			tableCell.add(new Paragraph(String.valueOf(cellNumericValue)));
+	                			table.addCell(tableCell);		
+	                			break;
+							case org.apache.poi.ss.usermodel.Cell.CELL_TYPE_BLANK:
+								tableCell = new Cell();
+	                			tableCell.add(new Paragraph(""));
+	                			table.addCell(tableCell);		
+	                			break;
+							default:
+								System.out.println("Cannot handle cell value for cell at row: " + cell.getRowIndex() + " and column: " + cell.getColumnIndex());
+								break;
+							}
+                			
+                		}
+                	}
+                	
+                	bulletinPdf.add(table);
+                	bulletinPdf.close();
+                	inputExcel.close();
+                }
+                
                 // JAVAFX Alert
             	alert = new Alert(AlertType.INFORMATION);
             	alert.setTitle("Information");
             	alert.setHeaderText("Information");
             	alert.setContentText("Bulletin Individuel généré");
-            	alert.showAndWait();
+            	alert.show();
             }
         }
     }
@@ -1879,7 +1945,7 @@ public class BulletinNote {
         alert.setTitle("Information");
         alert.setHeaderText("Information");
         alert.setContentText("Bulletin général généré");
-        alert.showAndWait();
+        alert.show();
         }
     }
 
@@ -2076,7 +2142,7 @@ public class BulletinNote {
         	alert.setTitle("Information");
         	alert.setHeaderText("Information");
         	alert.setContentText("Bilan de compensation généré");
-        	alert.showAndWait();
+        	alert.show();
             
         }
     }
@@ -2533,7 +2599,7 @@ public class BulletinNote {
     	alert.setTitle("Information");
     	alert.setHeaderText("Information");
     	alert.setContentText("Récapitulatif sur 3 ans généré");
-    	alert.showAndWait();
+    	alert.show();
         }
 
         
@@ -2546,5 +2612,15 @@ public class BulletinNote {
     public void setParam(ParamGeneral param) {
         this.param = param;
     }
+
+	public String getFormat() {
+		return format;
+	}
+
+	public void setFormat(String format) {
+		this.format = format;
+	}
+    
+    
 
 }

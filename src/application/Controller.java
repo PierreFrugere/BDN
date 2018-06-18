@@ -90,6 +90,9 @@ public class Controller {
     @FXML // fx:id="jfxCB_EleveInd"
     private JFXComboBox<String> jfxCB_EleveInd;			// Eleve Combo box
     
+    @FXML // fx:id="jfxCB_FormatInd"
+    private JFXComboBox<String> jfxCB_FormatInd;		// Format Combo box
+    
     @FXML // fx:id="jfxCB_PromotionGen"
     private JFXComboBox<String> jfxCB_PromotionGen;		// Promotion Combo box Bulletin General
     
@@ -132,6 +135,12 @@ public class Controller {
      */
     String cheminFichier;
     ArrayList<Eleve> listEleves = new ArrayList<Eleve>();
+    
+    // Constantes
+    public final static String EMPTY_STRING = "";
+    public final static String ALL_ELEVES = "Tous";
+    public final static String FORMAT_EXCEL = "Excel";
+    public final static String FORMAT_PDF = "PDF";
 	
     
     /*
@@ -195,16 +204,19 @@ public class Controller {
     @FXML
     private void handleEditionButtonBulletinIndividuel(ActionEvent event) {
     	
-    	if (jfxCB_EleveInd.getSelectionModel().getSelectedItem() != "") {
+    	if (jfxCB_EleveInd.getSelectionModel().getSelectedItem() != this.ALL_ELEVES) {
     		// Retrieve index of selected student
         	int indexOfSelectedStudent = jfxCB_EleveInd.getSelectionModel().getSelectedIndex();
+        	String selectedFormat = jfxCB_FormatInd.getSelectionModel().getSelectedItem();
         	
         	// Retrieve selected Eleve object
         	if (!this.listEleves.isEmpty()) {
-        		Eleve selectedEleve = this.listEleves.get(indexOfSelectedStudent);
+        		Eleve selectedEleve = this.listEleves.get(indexOfSelectedStudent - 2);
         		System.out.println("Selected Student: " + selectedEleve.getPrenomEleve() + " " + selectedEleve.getNomEleve() + "\tAt Index: " + indexOfSelectedStudent);
         		
         		BulletinNote bulletin = new BulletinNote(selectedEleve.getNomEleve(), selectedEleve.getPrenomEleve(), selectedEleve.getPromoEleve(), 11, 7, "01011970");
+        		bulletin.setFormat(selectedFormat);
+        		
         		try {
     				bulletin.bulletinIndividuel(selectedEleve.getNomEleve(), selectedEleve.getPrenomEleve(), jfxCB_AnneeInd.getValue(), jfxCB_PromotionInd.getValue());
     			} catch (ParseException | IOException e) {
@@ -262,7 +274,7 @@ public class Controller {
     	String promo = "";
     	ArrayList<String> listAnneesSansDoublons = new ArrayList<String>();
     	
-    	if (jfxCB_PromotionInd.getValue() != "") {
+    	if (jfxCB_PromotionInd.getValue() != this.EMPTY_STRING) {
     		promo = jfxCB_PromotionInd.getValue();
     		
     		listAnneesSansDoublons = this.retrieveAvailableAnneeByPromo(promo);
@@ -278,7 +290,7 @@ public class Controller {
     	} else {
     		jfxCB_AnneeInd.setDisable(true);
     		jfxCB_AnneeInd.getItems().clear();
-    		jfxCB_AnneeInd.setValue("");
+    		jfxCB_AnneeInd.setValue(this.EMPTY_STRING);
     		jfxb_EditionBilanIndividuel.setDisable(true);
     	}
     }
@@ -296,7 +308,7 @@ public class Controller {
     		promo = jfxCB_PromotionInd.getValue();
     	}
     	
-    	if (year != "" && promo != "") {
+    	if (year != this.EMPTY_STRING && promo != this.EMPTY_STRING) {
     		// Extract Eleves depending on selected promotion and year
         	Extracteur extracteurEleve = new Extracteur(this.cheminFichier + "\\" + promo + year + ".csv");
         	
@@ -306,6 +318,8 @@ public class Controller {
     			
     			// Getting a list of eleves name and firstname
     			ArrayList<String> listeEleveByNameAndFirstName = new ArrayList<String>();
+    			listeEleveByNameAndFirstName.add(this.EMPTY_STRING);
+    			listeEleveByNameAndFirstName.add(this.ALL_ELEVES);
     			
     			for (Eleve eleve: this.listEleves) {
     				listeEleveByNameAndFirstName.add(eleve.getPrenomEleve() + " " + eleve.getNomEleve());
@@ -318,9 +332,6 @@ public class Controller {
     	    	
     	    	// Enabling Eleves Combo box
     	    	jfxCB_EleveInd.setDisable(false);
-    	    	
-    	    	// Enabling Edition Button
-    	    	jfxb_EditionBilanIndividuel.setDisable(false);
  
     		} catch (ParseException e) {
     			e.printStackTrace();
@@ -329,7 +340,7 @@ public class Controller {
     		// Disabling eleves combo box
     		jfxCB_EleveInd.setDisable(true);
     		jfxCB_EleveInd.getItems().clear();
-    		jfxCB_EleveInd.setValue("");
+    		jfxCB_EleveInd.setValue(this.EMPTY_STRING);
     		
     		// Disabling Edition Button
     		jfxb_EditionBilanIndividuel.setDisable(true);
@@ -347,7 +358,7 @@ public class Controller {
     	String promo = "";
     	ArrayList<String> listAnneesSansDoublons = new ArrayList<String>();
     	
-    	if (jfxCB_PromotionGen.getValue() != "") {
+    	if (jfxCB_PromotionGen.getValue() != this.EMPTY_STRING) {
     		promo = jfxCB_PromotionGen.getValue();
     		
     		listAnneesSansDoublons = this.retrieveAvailableAnneeByPromo(promo);
@@ -363,7 +374,7 @@ public class Controller {
     	} else {
     		jfxCB_AnneeGen.setDisable(true);
     		jfxCB_AnneeGen.getItems().clear();
-    		jfxCB_AnneeGen.setValue("");
+    		jfxCB_AnneeGen.setValue(this.EMPTY_STRING);
     	}
     	
     }
@@ -379,6 +390,26 @@ public class Controller {
     	}
     }
     
+    @FXML
+    private void eleveIsSelectedOnBulletinGeneral(ActionEvent event) {
+    	// If a specific student is selected then the format cans be chosen as PDF or Excel
+    	// Otherwise Only Excel will be available
+    	if (jfxCB_EleveInd.getValue() == this.ALL_ELEVES) {
+    		jfxCB_FormatInd.getSelectionModel().select(this.FORMAT_EXCEL);
+    		jfxCB_FormatInd.setDisable(true);
+    	} else {
+    		jfxCB_FormatInd.getSelectionModel().select(this.FORMAT_PDF);
+    		jfxCB_FormatInd.setDisable(false);
+    	}
+    	
+    	// Enabling Edition Button depending on if a student is selected
+    	if (jfxCB_EleveInd.getValue() != this.EMPTY_STRING) {
+    		jfxb_EditionBilanIndividuel.setDisable(false);
+    	} else {
+    		jfxb_EditionBilanIndividuel.setDisable(true);
+    	}
+    }
+    
     
     /*
      * Behavior of UI changing depending on combo box value
@@ -390,7 +421,7 @@ public class Controller {
     	String promo = "";
     	ArrayList<String> listAnneesSansDoublons = new ArrayList<String>();
     	
-    	if (jfxCB_PromotionComp.getValue() != "") {
+    	if (jfxCB_PromotionComp.getValue() != this.EMPTY_STRING) {
     		promo = jfxCB_PromotionComp.getValue();
     		
     		listAnneesSansDoublons = this.retrieveAvailableAnneeByPromo(promo);
@@ -406,7 +437,7 @@ public class Controller {
     	} else {
     		jfxCB_AnneeComp.setDisable(true);
     		jfxCB_AnneeComp.getItems().clear();
-    		jfxCB_AnneeComp.setValue("");
+    		jfxCB_AnneeComp.setValue(this.EMPTY_STRING);
     	}
     	
     }
@@ -415,7 +446,7 @@ public class Controller {
     private void anneeIsFilledOnBilanCompensation(ActionEvent event) {
     	
     	// If the year is selected the edition is possible, otherwise it's not
-    	if (jfxCB_AnneeComp.getValue() != "") {
+    	if (jfxCB_AnneeComp.getValue() != this.EMPTY_STRING) {
     		jfxb_EditionBilanCompensation.setDisable(false);
     	} else {
     		jfxb_EditionBilanCompensation.setDisable(true);
@@ -432,7 +463,7 @@ public class Controller {
     private void promoIsFilledOnRecapTroisAns(ActionEvent event) {
     	
     	// If the year is selected the edition is possible, otherwise it's not
-    	if (jfxCB_PromotionRecap.getValue() != "") {
+    	if (jfxCB_PromotionRecap.getValue() != this.EMPTY_STRING) {
     		jfxb_EditionRecapTroisAns.setDisable(false);
     	} else {
     		jfxb_EditionRecapTroisAns.setDisable(true);
@@ -446,8 +477,14 @@ public class Controller {
     
     private void initialiseBilanIndividuelTab() {
     	ArrayList<String> listPromosSansDoublons = new ArrayList<String>();
-
+    	
     	listPromosSansDoublons = this.retrieveAvailablePromos();
+    	
+    	// Fill Format Combobox
+    	jfxCB_FormatInd.getItems().add(this.FORMAT_PDF);
+    	jfxCB_FormatInd.getItems().add(this.FORMAT_EXCEL);
+    	jfxCB_FormatInd.getSelectionModel().selectFirst();
+    	
 
     	// Add List of PROMOTION to respective Combo box
     	ObservableList<String> promotionComboBoxList = FXCollections.observableArrayList(listPromosSansDoublons);
@@ -455,11 +492,11 @@ public class Controller {
 
     	// Disabling Eleves combo box
     	jfxCB_EleveInd.setDisable(true);
-    	jfxCB_EleveInd.setValue("");
+    	jfxCB_EleveInd.setValue(this.EMPTY_STRING);
 
     	// Disabling Year combo box
     	jfxCB_AnneeInd.setDisable(true);
-    	jfxCB_AnneeInd.setValue("");
+    	jfxCB_AnneeInd.setValue(this.EMPTY_STRING);
 
     	// Disabling Edition button
     	jfxb_EditionBilanIndividuel.setDisable(true);
@@ -476,7 +513,7 @@ public class Controller {
     	
     	// Disabling Year Combo box
     	jfxCB_AnneeGen.setDisable(true);
-    	jfxCB_AnneeGen.setValue("");
+    	jfxCB_AnneeGen.setValue(this.EMPTY_STRING);
     	
     	// Disabling edition button
     	jfxb_EditionBulletinGeneral.setDisable(true);
@@ -493,7 +530,7 @@ public class Controller {
     	
     	// Disabling Year Combo box
     	jfxCB_AnneeComp.setDisable(true);
-    	jfxCB_AnneeComp.setValue("");
+    	jfxCB_AnneeComp.setValue(this.EMPTY_STRING);
     	
     	// Disabling edition button
     	jfxb_EditionBilanCompensation.setDisable(true);
@@ -550,7 +587,7 @@ public class Controller {
     	set.clear();
     	set.addAll(listPromo);
     	listPromosSansDoublons.addAll(set);
-    	listPromosSansDoublons.add("");			// Adding empty value to reset combo
+    	listPromosSansDoublons.add(this.EMPTY_STRING);			// Adding empty value to reset combo
     	Collections.sort(listPromosSansDoublons);
     	
     	return listPromosSansDoublons;
